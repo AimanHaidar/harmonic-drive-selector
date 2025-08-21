@@ -69,7 +69,29 @@ def tourqe_based_dimensioning(T,n,gear_set_df):
             continue
         break
 
+    #Determination of the maximum torque from load cycle
+
+    R_T_max = max(T['T_cycle']) # repeted maximum tourqe from cycle
+    T_R = gear_set_df.loc[0,"Limit for repeated peak torque [Nm]"]
+    while 1:
+        if R_T_max > T_R:
+            gear_index+=1
+            T_R = gear_set_df.loc[gear_index,"Limit for repeated peak torque [Nm]"]
+            continue
+        break
+
+    T_k = T['T_k']
+    T_M = gear_set_df.loc[0,"Limit for momentary peak torque [Nm]"]
+    while 1:
+        if T_k > T_M:
+            gear_index+=1
+            T_M = gear_set_df.loc[gear_index,"Limit for momentary peak torque [Nm]"]
+            continue
+        break
     
+
+
+
 
     
 
