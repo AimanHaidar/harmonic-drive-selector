@@ -1,4 +1,4 @@
-from data.LSNtable import df
+from data.reducers_tables import df
 def main():
     print("Hello from harmonic-drives-selector!")
     print(df)
