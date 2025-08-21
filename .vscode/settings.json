@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": ".venv/bin/python",
+    "python.analysis.extraPaths": [
+        "./utils/harmonic_drive_selector/.venv/lib/python3.12/site-packages"
+    ]
+}
