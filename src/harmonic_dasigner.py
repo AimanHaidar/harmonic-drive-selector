@@ -59,5 +59,17 @@ def tourqe_based_dimensioning(T,n,gear_set_df):
             n_av = gear_set_df.loc[gear_index,"Limit for average input speed [rpm]"]
             continue
         break
+
+    input_n_max = i*max(n)
+    n_max = gear_set_df.loc[0,"Max. input speed [rpm]"]
+    while 1:
+        if  n_max < input_n_max:
+            gear_index+=1
+            n_max = gear_set_df.loc[gear_index,"Max. input speed [rpm]"]
+            continue
+        break
+
     
+
     
+
