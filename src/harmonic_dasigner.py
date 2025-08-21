@@ -38,60 +38,50 @@ def tourqe_based_dimensioning(T,n,gear_set_df):
         nt += abs(n_i)*T['dt']
     T_av = (T3nt/nt)**(1/3)
 
+    # Calculation of the average output speed
     T_A = gear_set_df.loc[0,"Limit for average torque [Nm]"]
+    i = gear_set_df.loc[gear_index,"Ratio"]
+    input_n_av =  i*(nt/(len(T['T_cycle']*T['dt'])))
+    n_av = gear_set_df.loc[0,"Limit for average input speed [rpm]"]
 
-    # this loop check and stop for the reducer with the appropriat average load
+    # Determination of the maximum input speed from load cycle
+    input_n_max = i*max(n)
+    n_max = gear_set_df.loc[0,"Max. input speed [rpm]"]
+
+    #Determination of the maximum torque from load cycle
+    R_T_max = max(T['T_cycle']) # repeted maximum tourqe from cycle
+    T_R = gear_set_df.loc[0,"Limit for repeated peak torque [Nm]"]
+
+    # Determination of the overload torque
+    T_k = T['T_k']
+    T_M = gear_set_df.loc[0,"Limit for momentary peak torque [Nm]"]
+
+    # main algorithm loop
     while 1:
         if T_A < T_av:
             gear_index+=1
             T_A = gear_set_df.loc[gear_index,"Limit for average torque [Nm]"]
             continue
-        break
 
-    i = gear_set_df.loc[gear_index,"Ratio"]
-    input_n_av =  i*(nt/(len(T['T_cycle']*T['dt'])))
-    
-    # this loop check and stop for the reducer with the appropriat average rot. speed
-    n_av = gear_set_df.loc[0,"Limit for average input speed [rpm]"]
-    while 1:
         if n_av < input_n_av:
             gear_index+=1
             n_av = gear_set_df.loc[gear_index,"Limit for average input speed [rpm]"]
             continue
-        break
 
-    input_n_max = i*max(n)
-    n_max = gear_set_df.loc[0,"Max. input speed [rpm]"]
-    while 1:
         if  n_max < input_n_max:
             gear_index+=1
             n_max = gear_set_df.loc[gear_index,"Max. input speed [rpm]"]
             continue
-        break
 
-    #Determination of the maximum torque from load cycle
-
-    R_T_max = max(T['T_cycle']) # repeted maximum tourqe from cycle
-    T_R = gear_set_df.loc[0,"Limit for repeated peak torque [Nm]"]
-    while 1:
         if R_T_max > T_R:
             gear_index+=1
             T_R = gear_set_df.loc[gear_index,"Limit for repeated peak torque [Nm]"]
             continue
-        break
-
-    T_k = T['T_k']
-    T_M = gear_set_df.loc[0,"Limit for momentary peak torque [Nm]"]
-    while 1:
+        
         if T_k > T_M:
             gear_index+=1
             T_M = gear_set_df.loc[gear_index,"Limit for momentary peak torque [Nm]"]
             continue
+
         break
-    
-
-
-
-
-    
-
+    print(gear_set_df.loc[gear_index])
