@@ -17,8 +17,8 @@
    <widget class="QLabel" name="CSG_photo">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>90</y>
+      <x>120</x>
+      <y>130</y>
       <width>241</width>
       <height>241</height>
      </rect>
@@ -36,8 +36,8 @@
    <widget class="QLabel" name="SHG_photo">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>90</y>
+      <x>460</x>
+      <y>130</y>
       <width>251</width>
       <height>241</height>
      </rect>
@@ -55,43 +55,96 @@
    <widget class="QLabel" name="CSG_label">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>60</y>
-      <width>161</width>
+      <x>120</x>
+      <y>100</y>
+      <width>241</width>
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>   Solid Shaft Reducer</string>
+     <string>   Solid Shaft Reducer (CSG)</string>
     </property>
    </widget>
    <widget class="QLabel" name="SHG_label">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>60</y>
-      <width>141</width>
+      <x>470</x>
+      <y>100</y>
+      <width>241</width>
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>Hollow Shaft Reducer</string>
+     <string>Hollow Shaft Reducer (SHG)</string>
     </property>
    </widget>
    <widget class="QLabel" name="Title">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>20</y>
-      <width>251</width>
+      <x>180</x>
+      <y>40</y>
+      <width>481</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Welcome to Harmonic Drive Selector</string>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>400</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>450</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Exit</string>
     </property>
    </widget>
   </widget>
