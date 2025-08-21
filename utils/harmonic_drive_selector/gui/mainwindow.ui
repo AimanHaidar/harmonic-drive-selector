@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../../../Pictures/Screenshots/Screenshot from 2025-08-21 21-08-40.png</pixmap>
+     <pixmap>pictures/CSG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -46,7 +46,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../../../Pictures/Screenshots/Screenshot from 2025-08-21 21-08-28.png</pixmap>
+     <pixmap>pictures/SHG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

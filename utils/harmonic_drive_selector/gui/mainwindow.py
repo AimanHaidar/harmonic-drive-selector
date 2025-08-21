@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -19,13 +20,13 @@ class Ui_MainWindow(object):
         self.CSG_photo = QtWidgets.QLabel(self.centralwidget)
         self.CSG_photo.setGeometry(QtCore.QRect(120, 130, 241, 241))
         self.CSG_photo.setText("")
-        self.CSG_photo.setPixmap(QtGui.QPixmap("../../../../../Pictures/Screenshots/Screenshot from 2025-08-21 21-08-40.png"))
+        self.CSG_photo.setPixmap(QtGui.QPixmap("pictures/CSG_photo.png"))
         self.CSG_photo.setScaledContents(True)
         self.CSG_photo.setObjectName("CSG_photo")
         self.SHG_photo = QtWidgets.QLabel(self.centralwidget)
         self.SHG_photo.setGeometry(QtCore.QRect(460, 130, 251, 241))
         self.SHG_photo.setText("")
-        self.SHG_photo.setPixmap(QtGui.QPixmap("../../../../../Pictures/Screenshots/Screenshot from 2025-08-21 21-08-28.png"))
+        self.SHG_photo.setPixmap(QtGui.QPixmap("pictures/SHG_photo.png"))
         self.SHG_photo.setScaledContents(True)
         self.SHG_photo.setObjectName("SHG_photo")
         self.CSG_label = QtWidgets.QLabel(self.centralwidget)
