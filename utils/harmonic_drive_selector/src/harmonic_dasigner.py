@@ -127,4 +127,4 @@ n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
-print(tourqe_based_dimensioning("CSG",T,n,L_req,{'Series': "CSG",'Size': 14,'Ratio': 50}))
+print(tourqe_based_dimensioning("SHG",T,n,L_req,{'Series': "SHG",'Size': 14,'Ratio': 50}))
