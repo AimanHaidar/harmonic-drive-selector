@@ -39,10 +39,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>you choosed                 do you want to proceed selecting with this type?</string>
+    <string>you choosed            do you want to proceed selecting with this type?</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="harmonic_type">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -52,7 +52,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>R_type.</string>
+    <string>type.</string>
    </property>
   </widget>
  </widget>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drives-selector/utils/harmonic_drive_selector/gui/ui/type_inform_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/type_inform_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -23,9 +23,9 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(30, 30, 471, 20))
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(120, 30, 66, 19))
-        self.label_2.setObjectName("label_2")
+        self.harmonic_type = QtWidgets.QLabel(Dialog)
+        self.harmonic_type.setGeometry(QtCore.QRect(120, 30, 66, 19))
+        self.harmonic_type.setObjectName("harmonic_type")
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
@@ -35,5 +35,5 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "you choosed                 do you want to proceed selecting with this type?"))
-        self.label_2.setText(_translate("Dialog", "R_type."))
+        self.label.setText(_translate("Dialog", "you choosed            do you want to proceed selecting with this type?"))
+        self.harmonic_type.setText(_translate("Dialog", "type."))

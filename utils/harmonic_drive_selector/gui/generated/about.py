@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drives-selector/utils/harmonic_drive_selector/gui/ui/about.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/about.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
