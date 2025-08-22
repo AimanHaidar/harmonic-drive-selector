@@ -50,6 +50,11 @@ class HarmonicSelctorApp(QMainWindow):
         elif first_selection == first_selection_dialog.Rejected:
             selection_input_dialog = SelectionInputDialog()
             selection_input_dialog.exec_()
+            self.first_selection = selection_input_dialog.ui.lineEdit.text()
+            print(self.first_selection)
+            self.input_data()
+        
+
 
 
     def show_about(self):
