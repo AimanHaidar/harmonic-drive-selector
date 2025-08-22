@@ -7,6 +7,7 @@ from gui.generated.about import Ui_Form
 from gui.dialogs.first_selection_dialog import FirstSelectionDialog
 from gui.dialogs.cable_dialog import CableDialog
 from gui.dialogs.selection_input_dialog import SelectionInputDialog
+from gui.dialogs.type_inform_dialog import TypeInformDialog
 
 import sys
 from pathlib import Path
@@ -31,7 +32,15 @@ class HarmonicSelctorApp(QMainWindow):
         first_selection = first_selection_dialog.exec_()
         if  first_selection == first_selection_dialog.Accepted:
             cable_dialog = CableDialog()
-            cable_dialog.exec_()
+            with_cable = cable_dialog.exec_()
+            if with_cable == cable_dialog.Accepted:
+                type_inform_dialog = TypeInformDialog()
+                type_inform_dialog.ui.harmonic_type.setText("SHG.")
+                type_inform_dialog.exec_()
+            else:
+                type_inform_dialog = TypeInformDialog()
+                type_inform_dialog.ui.harmonic_type.setText("CSG.")
+                type_inform_dialog.exec_()
         
         elif first_selection == first_selection_dialog.Rejected:
             selection_input_dialog = SelectionInputDialog()
