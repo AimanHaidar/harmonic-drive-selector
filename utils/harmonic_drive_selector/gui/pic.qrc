@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="pictures">
+    <file>pictures/CSG_photo.png</file>
+    <file>pictures/SHG_photo.png</file>
+  </qresource>
+</RCC>

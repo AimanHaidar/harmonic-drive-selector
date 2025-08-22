@@ -17,7 +17,7 @@
    <widget class="QLabel" name="CSG_photo">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>100</x>
       <y>130</y>
       <width>241</width>
       <height>241</height>
@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>pictures/CSG_photo.png</pixmap>
+     <pixmap resource="pic.qrc">:/pictures/pictures/CSG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -36,7 +36,7 @@
    <widget class="QLabel" name="SHG_photo">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>440</x>
       <y>130</y>
       <width>251</width>
       <height>241</height>
@@ -46,7 +46,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>pictures/SHG_photo.png</pixmap>
+     <pixmap resource="pic.qrc">:/pictures/pictures/SHG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -55,9 +55,9 @@
    <widget class="QLabel" name="CSG_label">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>100</y>
-      <width>241</width>
+      <x>80</x>
+      <y>90</y>
+      <width>301</width>
       <height>20</height>
      </rect>
     </property>
@@ -67,15 +67,15 @@
      </font>
     </property>
     <property name="text">
-     <string>   Solid Shaft Reducer (CSG)</string>
+     <string>   Solid Shaft Reducer (CSG-2UH)</string>
     </property>
    </widget>
    <widget class="QLabel" name="SHG_label">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>100</y>
-      <width>241</width>
+      <x>430</x>
+      <y>90</y>
+      <width>301</width>
       <height>20</height>
      </rect>
     </property>
@@ -85,13 +85,13 @@
      </font>
     </property>
     <property name="text">
-     <string>Hollow Shaft Reducer (SHG)</string>
+     <string>Hollow Shaft Reducer (SHG-2UH)</string>
     </property>
    </widget>
    <widget class="QLabel" name="Title">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>160</x>
       <y>40</y>
       <width>481</width>
       <height>21</height>
@@ -114,8 +114,8 @@
    <widget class="QPushButton" name="start_pushButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>400</y>
+      <x>330</x>
+      <y>390</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -132,8 +132,8 @@
    <widget class="QPushButton" name="exit_pushButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>450</y>
+      <x>330</x>
+      <y>490</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -145,6 +145,24 @@
     </property>
     <property name="text">
      <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="about_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>440</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>About</string>
     </property>
    </widget>
   </widget>
@@ -160,6 +178,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="pic.qrc"/>
+ </resources>
  <connections/>
 </ui>
