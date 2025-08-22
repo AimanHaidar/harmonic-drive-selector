@@ -40,15 +40,16 @@ class HarmonicSelctorApp(QMainWindow):
             else:
                 self.infrom_type("CSG. ")
 
-            if self.informed:
-                self.input_data()
+            if not self.informed:
+                return
         
         elif first_selection == first_selection_dialog.Accepted:
             selection_input_dialog = SelectionInputDialog()
             selection_input_dialog.exec_()
             self.first_selection = selection_input_dialog.ui.lineEdit.text()
             print(self.first_selection)
-            self.input_data()
+            
+        self.input_data()
 
     def show_about(self):
         # This function is called when the start button is clicked
@@ -58,8 +59,9 @@ class HarmonicSelctorApp(QMainWindow):
         self.Form.show()
     
     def input_data(self):
-        data_dialot = DataDialog()
-        data_dialot.exec_()
+        data_dialog = DataDialog()
+        data_dialog.exec_()
+        return data_dialog.ui.dataTable.item
 
     def infrom_type(self,type):
         type_inform_dialog = TypeInformDialog()
