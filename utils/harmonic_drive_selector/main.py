@@ -31,7 +31,7 @@ class HarmonicSelctorApp(QMainWindow):
     def start_selection(self):
         first_selection_dialog = FirstSelectionDialog()
         first_selection = first_selection_dialog.exec_()
-        if  first_selection == first_selection_dialog.Accepted:
+        if  first_selection == first_selection_dialog.Rejected:
             cable_dialog = CableDialog()
             with_cable = cable_dialog.exec_()
             informed = None
@@ -47,7 +47,7 @@ class HarmonicSelctorApp(QMainWindow):
             if informed == type_inform_dialog.Accepted:
                 self.input_data()
         
-        elif first_selection == first_selection_dialog.Rejected:
+        elif first_selection == first_selection_dialog.Accepted:
             selection_input_dialog = SelectionInputDialog()
             selection_input_dialog.exec_()
             self.first_selection = selection_input_dialog.ui.lineEdit.text()
