@@ -8,6 +8,7 @@ from gui.dialogs.first_selection_dialog import FirstSelectionDialog
 from gui.dialogs.cable_dialog import CableDialog
 from gui.dialogs.selection_input_dialog import SelectionInputDialog
 from gui.dialogs.type_inform_dialog import TypeInformDialog
+from gui.dialogs.data_dialog import DataDialog
 
 import sys
 from pathlib import Path
@@ -33,14 +34,18 @@ class HarmonicSelctorApp(QMainWindow):
         if  first_selection == first_selection_dialog.Accepted:
             cable_dialog = CableDialog()
             with_cable = cable_dialog.exec_()
+            informed = None
             if with_cable == cable_dialog.Accepted:
                 type_inform_dialog = TypeInformDialog()
                 type_inform_dialog.ui.harmonic_type.setText("SHG.")
-                type_inform_dialog.exec_()
+                informed = type_inform_dialog.exec_()
             else:
                 type_inform_dialog = TypeInformDialog()
                 type_inform_dialog.ui.harmonic_type.setText("CSG.")
-                type_inform_dialog.exec_()
+                informed = type_inform_dialog.exec_()
+
+            if informed == type_inform_dialog.Accepted:
+                self.input_data()
         
         elif first_selection == first_selection_dialog.Rejected:
             selection_input_dialog = SelectionInputDialog()
@@ -53,6 +58,10 @@ class HarmonicSelctorApp(QMainWindow):
         self.about = Ui_Form()
         self.about.setupUi(self.Form)
         self.Form.show()
+    
+    def input_data(self):
+        data_dialot = DataDialog()
+        data_dialot.exec_()
 
 def main():
     print("Hello from harmonic-drives-selector!")
