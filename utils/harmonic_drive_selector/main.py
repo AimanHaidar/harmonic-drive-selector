@@ -34,17 +34,12 @@ class HarmonicSelctorApp(QMainWindow):
         if  first_selection == first_selection_dialog.Rejected:
             cable_dialog = CableDialog()
             with_cable = cable_dialog.exec_()
-            informed = None
             if with_cable == cable_dialog.Accepted:
-                type_inform_dialog = TypeInformDialog()
-                type_inform_dialog.ui.harmonic_type.setText("SHG.")
-                informed = type_inform_dialog.exec_()
+                self.infrom_type("SHG. ")
             else:
-                type_inform_dialog = TypeInformDialog()
-                type_inform_dialog.ui.harmonic_type.setText("CSG.")
-                informed = type_inform_dialog.exec_()
+                self.infrom_type("CSG. ")
 
-            if informed == type_inform_dialog.Accepted:
+            if self.informed:
                 self.input_data()
         
         elif first_selection == first_selection_dialog.Accepted:
@@ -67,6 +62,11 @@ class HarmonicSelctorApp(QMainWindow):
     def input_data(self):
         data_dialot = DataDialog()
         data_dialot.exec_()
+
+    def infrom_type(self,type):
+        type_inform_dialog = TypeInformDialog()
+        type_inform_dialog.ui.harmonic_type.setText(type)
+        self.informed = type_inform_dialog.exec_()
 
 def main():
     print("Hello from harmonic-drives-selector!")
