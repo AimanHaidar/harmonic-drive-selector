@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtWidgets
-from gui.mainwindow import Ui_MainWindow
-from gui.about import Ui_Form
+from gui.src.mainwindow import Ui_MainWindow
+from gui.src.about import Ui_Form
 import sys
 from pathlib import Path
 
