@@ -27,6 +27,7 @@ class HarmonicSelctorApp(QMainWindow):
         # connect pushButton to a function
         self.ui.about_pushButton.clicked.connect(self.show_about)
         self.ui.start_pushButton.clicked.connect(self.start_selection)
+        self.ui.exit_pushButton.clicked.connect(self.close)
 
     def start_selection(self):
         first_selection_dialog = FirstSelectionDialog()
@@ -48,9 +49,6 @@ class HarmonicSelctorApp(QMainWindow):
             self.first_selection = selection_input_dialog.ui.lineEdit.text()
             print(self.first_selection)
             self.input_data()
-        
-
-
 
     def show_about(self):
         # This function is called when the start button is clicked
