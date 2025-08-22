@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from gui.generated.data_dialog import Ui_Dialog
+from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 
 class DataDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -31,10 +32,14 @@ class DataDialog(QtWidgets.QDialog):
                 item = self.ui.dataTable.item(row, col)
                 if item is None or item.text() == "":
                     print(f"Empty cell at ({row+1},{col+1})")
+                    non_numbers_dialog = NonNumbersDialog()
+                    non_numbers_dialog.exec_()
                     return
                 try:
                     float(item.text())
                 except ValueError:
                     print(f"Invalid float at ({row+1},{col+1}): {item.text()}")
+                    non_numbers_dialog = NonNumbersDialog()
+                    non_numbers_dialog.exec_()
                     return
         self.accept()

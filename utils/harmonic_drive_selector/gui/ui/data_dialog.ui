@@ -32,7 +32,7 @@
   <widget class="QRadioButton" name="array_s">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>260</x>
      <y>0</y>
      <width>61</width>
      <height>41</height>
@@ -45,7 +45,7 @@
   <widget class="QRadioButton" name="json_s">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>340</x>
      <y>0</y>
      <width>91</width>
      <height>41</height>
@@ -73,72 +73,56 @@
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>371</width>
-     <height>121</height>
+     <width>401</width>
+     <height>131</height>
     </rect>
    </property>
    <property name="lineWidth">
     <number>1</number>
    </property>
    <attribute name="horizontalHeaderDefaultSectionSize">
-    <number>50</number>
+    <number>110</number>
    </attribute>
    <row>
     <property name="text">
-     <string>Tourqe</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Anglur Speed</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>timestamps</string>
-    </property>
-   </row>
-   <column>
-    <property name="text">
      <string>1</string>
     </property>
-   </column>
-   <column>
+   </row>
+   <row>
     <property name="text">
      <string>2</string>
     </property>
-   </column>
-   <column>
+   </row>
+   <row>
     <property name="text">
      <string>3</string>
     </property>
-   </column>
-   <column>
+   </row>
+   <row>
     <property name="text">
      <string>overload</string>
     </property>
-   </column>
-   <column>
+   </row>
+   <row>
     <property name="text">
      <string>Dwell</string>
     </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>Tourqe</string>
+    </property>
    </column>
-   <item row="0" column="4">
+   <column>
     <property name="text">
-     <string/>
+     <string>Angular Speed</string>
     </property>
-    <property name="flags">
-     <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable</set>
-    </property>
-   </item>
-   <item row="1" column="4">
+   </column>
+   <column>
     <property name="text">
-     <string/>
+     <string>Timestapm</string>
     </property>
-    <property name="flags">
-     <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable</set>
-    </property>
-   </item>
+   </column>
   </widget>
   <widget class="QLineEdit" name="file_path">
    <property name="enabled">
@@ -146,8 +130,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>90</y>
+     <x>30</x>
+     <y>100</y>
      <width>391</width>
      <height>31</height>
     </rect>
