@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="yes_button">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -26,7 +26,7 @@
     <string>Yes</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="no_button">
    <property name="geometry">
     <rect>
      <x>100</x>
