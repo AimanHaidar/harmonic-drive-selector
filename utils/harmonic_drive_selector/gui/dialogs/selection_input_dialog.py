@@ -6,3 +6,5 @@ class SelectionInputDialog(QtWidgets.QDialog):
         super().__init__(parent)
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+        self.ui.yes_button.clicked.connect(self.accept)
+        self.ui.no_button.clicked.connect(self.reject)
