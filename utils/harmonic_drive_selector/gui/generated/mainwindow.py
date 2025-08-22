@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
         self.start_pushButton.setText(_translate("MainWindow", "Start"))
         self.exit_pushButton.setText(_translate("MainWindow", "Exit"))
         self.about_pushButton.setText(_translate("MainWindow", "About"))
-from .. import pic_rc
+from ..resources import pic_rc
 
 
 if __name__ == "__main__":
