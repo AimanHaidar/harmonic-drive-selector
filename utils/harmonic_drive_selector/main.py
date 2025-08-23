@@ -9,6 +9,10 @@ from gui.dialogs.cable_dialog import CableDialog
 from gui.dialogs.selection_input_dialog import SelectionInputDialog
 from gui.dialogs.type_inform_dialog import TypeInformDialog
 from gui.dialogs.data_dialog import DataDialog
+from gui.dialogs.input_lifetime_dialog import InputLifetimeDialog
+from gui.dialogs.non_numbers_dialog import NonNumbersDialog
+
+from src.harmonic_dasigner import tourqe_based_dimensioning
 
 import sys
 from pathlib import Path
@@ -32,12 +36,15 @@ class HarmonicSelctorApp(QMainWindow):
     def start_selection(self):
         first_selection_dialog = FirstSelectionDialog()
         first_selection = first_selection_dialog.exec_()
+        proceed = True
         if  first_selection == first_selection_dialog.Rejected:
             cable_dialog = CableDialog()
             with_cable = cable_dialog.exec_()
             if with_cable == cable_dialog.Accepted:
+                self.type = "SHG"
                 self.infrom_type("SHG. ")
             else:
+                self.type = "CSG"
                 self.infrom_type("CSG. ")
 
             if not self.informed:
@@ -45,11 +52,36 @@ class HarmonicSelctorApp(QMainWindow):
         
         elif first_selection == first_selection_dialog.Accepted:
             selection_input_dialog = SelectionInputDialog()
-            selection_input_dialog.exec_()
-            self.first_selection = selection_input_dialog.ui.lineEdit.text()
-            print(self.first_selection)
-            
-        self.input_data()
+            state = selection_input_dialog.exec_()
+            self.first_selection = selection_input_dialog.first_selection
+            if selection_input_dialog.Rejected == state:
+                proceed = False
+
+        if proceed:
+            self.data = self.input_data()
+            if not self.data:
+                return
+            self.T = {}
+            self.T = {}
+            self.T['T_cycle'] = [self.data[0][0], self.data[1][0], self.data[2][0]]
+            self.T['T_k']     = self.data[3][0]
+            self.T['t_k']     = self.data[3][2]
+            self.T['t_p']     = self.data[4][2]
+            self.T['dt'] = [self.data[0][2], self.data[1][2], self.data[2][2]]
+
+            self.n = {}
+            self.n['n_cycle'] = [self.data[0][1], self.data[1][1], self.data[2][1]]
+            self.n['n_k']     = self.data[3][1]
+
+
+            input_lifetime_dialog = InputLifetimeDialog()
+            state = input_lifetime_dialog.exec_()
+            if state == input_lifetime_dialog.Rejected:
+                return
+            self.lifetime = input_lifetime_dialog.lifetime
+
+            print(tourqe_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection))
+
 
     def show_about(self):
         # This function is called when the start button is clicked
@@ -60,8 +92,11 @@ class HarmonicSelctorApp(QMainWindow):
     
     def input_data(self):
         data_dialog = DataDialog()
-        data_dialog.exec_()
-        return data_dialog.ui.dataTable.item
+        state = data_dialog.exec_()
+        if state == data_dialog.Accepted:
+            return data_dialog.float_data
+        else:
+            return False
 
     def infrom_type(self,type):
         type_inform_dialog = TypeInformDialog()
