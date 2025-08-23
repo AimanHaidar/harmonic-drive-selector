@@ -45,10 +45,10 @@ class HarmonicSelctorApp(QMainWindow):
             with_cable = cable_dialog.exec_()
             if with_cable == cable_dialog.Accepted:
                 self.type = "SHG"
-                self.infrom_type("SHG. ")
+                self.infrom_type("you choosed SHG.do you want to proceed selecting with this type?")
             else:
                 self.type = "CSG"
-                self.infrom_type("CSG. ")
+                self.infrom_type("you choosed CSG.do you want to proceed selecting with this type?")
 
             if not self.informed:
                 return

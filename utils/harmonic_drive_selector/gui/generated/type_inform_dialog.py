@@ -20,11 +20,8 @@ class Ui_Dialog(object):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(30, 30, 471, 20))
-        self.label.setObjectName("label")
         self.harmonic_type = QtWidgets.QLabel(Dialog)
-        self.harmonic_type.setGeometry(QtCore.QRect(120, 30, 66, 19))
+        self.harmonic_type.setGeometry(QtCore.QRect(20, 40, 481, 19))
         self.harmonic_type.setObjectName("harmonic_type")
 
         self.retranslateUi(Dialog)
@@ -35,5 +32,4 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "you choosed            do you want to proceed selecting with this type?"))
-        self.harmonic_type.setText(_translate("Dialog", "type."))
+        self.harmonic_type.setText(_translate("Dialog", "you choosed             do you want to proceed selecting with this type?"))
