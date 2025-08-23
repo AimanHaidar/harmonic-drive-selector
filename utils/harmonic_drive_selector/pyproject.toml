@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.10.5",
     "pandas>=2.3.1",
+    "pipreqs>=0.5.0",
     "pyinstaller>=6.15.0",
     "pyqt5>=5.15.11",
     "reportlab>=4.4.3",
