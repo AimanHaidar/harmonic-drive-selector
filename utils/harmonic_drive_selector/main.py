@@ -53,7 +53,10 @@ class HarmonicSelctorApp(QMainWindow):
         elif first_selection == first_selection_dialog.Accepted:
             selection_input_dialog = SelectionInputDialog()
             state = selection_input_dialog.exec_()
-            self.first_selection = selection_input_dialog.first_selection
+            try:
+                self.first_selection = selection_input_dialog.first_selection
+            except AttributeError:
+                pass
             if selection_input_dialog.Rejected == state:
                 proceed = False
 
