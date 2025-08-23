@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from gui.generated.mainwindow import Ui_MainWindow
 from gui.generated.about import Ui_Form
 from gui.dialogs.first_selection_dialog import FirstSelectionDialog
@@ -99,6 +99,7 @@ class HarmonicSelctorApp(QMainWindow):
             result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.data)
             result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
             result_dialog.ui.selection.setText((self.selection))
+            result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/"+self.selection.split("-")[0]+"_photo.png"))
             result_dialog.exec_()
             
 
