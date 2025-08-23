@@ -46,28 +46,38 @@ class DataDialog(QtWidgets.QDialog):
         self.ui.label_2.show()
 
     def insert_data(self):
-        for col in range(self.ui.dataTable.columnCount()):
-            for row in range(self.ui.dataTable.rowCount()):
-                #skip last row first two columns for lifetime and pause time
-                if row==self.ui.dataTable.rowCount()-1 and col == 0:
-                    continue
-                if row==self.ui.dataTable.rowCount()-1 and col == 1:
-                    continue
+        if self.ui.array_s.isChecked():
+            for col in range(self.ui.dataTable.columnCount()):
+                for row in range(self.ui.dataTable.rowCount()):
+                    #skip last row first two columns for lifetime and pause time
+                    if row==self.ui.dataTable.rowCount()-1 and col == 0:
+                        continue
+                    if row==self.ui.dataTable.rowCount()-1 and col == 1:
+                        continue
 
-                item = self.ui.dataTable.item(row, col)
-                if item is None or item.text() == "":
-                    print(f"Empty cell at ({row+1},{col+1})")
-                    non_numbers_dialog = NonNumbersDialog()
-                    non_numbers_dialog.exec_()
-                    return
-                
-                try:
-                    print(item.text())
-                    self.float_data[row][col] = float(item.text())
-                except ValueError:
-                    print(f"Invalid float at ({row+1},{col+1}): {item.text()}")
-                    non_numbers_dialog = NonNumbersDialog()
-                    non_numbers_dialog.exec_()
-                    return
-        print(self.float_data)
-        self.accept()
+                    item = self.ui.dataTable.item(row, col)
+                    if item is None or item.text() == "":
+                        print(f"Empty cell at ({row+1},{col+1})")
+                        non_numbers_dialog = NonNumbersDialog()
+                        non_numbers_dialog.exec_()
+                        return
+                    
+                    try:
+                        print(item.text())
+                        self.float_data[row][col] = float(item.text())
+                    except ValueError:
+                        print(f"Invalid float at ({row+1},{col+1}): {item.text()}")
+                        non_numbers_dialog = NonNumbersDialog()
+                        non_numbers_dialog.exec_()
+                        return
+            print(self.float_data)
+            self.accept()
+        elif self.ui.json_s.isChecked():
+            not_offered_dialog = NonNumbersDialog()
+            not_offered_dialog.ui.textBrowser.setText("JSON input not yet supported")
+            not_offered_dialog.exec_()
+            return
+        else:
+            non_numbers_dialog = NonNumbersDialog()
+            non_numbers_dialog.exec_()
+            return
