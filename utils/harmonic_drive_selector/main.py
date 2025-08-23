@@ -1,9 +1,9 @@
 import sys
+
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtWidgets
 from gui.generated.mainwindow import Ui_MainWindow
 from gui.generated.about import Ui_Form
-
 from gui.dialogs.first_selection_dialog import FirstSelectionDialog
 from gui.dialogs.cable_dialog import CableDialog
 from gui.dialogs.selection_input_dialog import SelectionInputDialog
@@ -11,8 +11,10 @@ from gui.dialogs.type_inform_dialog import TypeInformDialog
 from gui.dialogs.data_dialog import DataDialog
 from gui.dialogs.input_lifetime_dialog import InputLifetimeDialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
+from gui.dialogs.result_dialog import ResultDialog
 
 from src.harmonic_dasigner import tourqe_based_dimensioning
+from data.reducers_tables import reducers_df
 
 import sys
 from pathlib import Path
@@ -69,7 +71,7 @@ class HarmonicSelctorApp(QMainWindow):
             self.T = {}
             self.T = {}
             self.T['T_cycle'] = [self.data[0][0], self.data[1][0], self.data[2][0]]
-            print(self.T)
+
             self.T['T_k']     = self.data[3][0]
             self.T['t_k']     = self.data[3][2]
             self.T['t_p']     = self.data[4][2]
@@ -86,9 +88,18 @@ class HarmonicSelctorApp(QMainWindow):
                 return
             self.lifetime = input_lifetime_dialog.lifetime
             if first_selection_mode:
-                print(tourqe_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection))
+                self.selection = tourqe_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection)
             else:
-                print(tourqe_based_dimensioning(self.type,self.T,self.n,self.lifetime))
+                self.selection = tourqe_based_dimensioning(self.type,self.T,self.n,self.lifetime)
+            
+            print(self.selection)
+            drive_specs = reducers_df[(reducers_df["Series"] == self.selection.split("-")[0]) & (reducers_df["Size"] == int(self.selection.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection.split("-")[2]))]
+            drive_specs = drive_specs.to_numpy().transpose()
+            result_dialog = ResultDialog()
+            result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.data)
+            result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
+            result_dialog.ui.selection.setText((self.selection))
+            result_dialog.exec_()
             
 
     def show_about(self):
