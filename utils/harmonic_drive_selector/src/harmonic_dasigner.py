@@ -115,7 +115,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
         L_10 = L_n*(n_N/input_n_av)*(T_N/T_av)**3
         # Checking the Wave Generator bearing lifetime
         # Calculated lifetime L10h > required lifetime L10 req.
-        if L_10_req < L_10:
+        if L_10_req > L_10:
             gear_index+=1
 
         break
@@ -128,5 +128,5 @@ n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
-print(tourqe_based_dimensioning("SHG",T,n,L_req))
+print(tourqe_based_dimensioning("CSG",T,n,L_req,first_selection = {'Series': "CSG",'Size': 40,'Ratio': 120}))
 
