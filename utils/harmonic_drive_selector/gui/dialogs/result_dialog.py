@@ -14,32 +14,35 @@ class ResultDialog(QtWidgets.QDialog):
             "Limit for average torque [Nm]", "Rated torque at rated speed 2000 rpm [Nm]",
             "Limit for momentary peak torque [Nm]", "Max. input speed [rpm]",
             "Limit for average input speed [rpm]", "Moment of inertia [x10^-4]",
-            "Weight"
+            "Weight (standard version,light version) [kg]",
         ]
-        data_model = QStandardItemModel(5, 3)
-        specs_model = QStandardItemModel(len(columns),1)
+        self.data_model = QStandardItemModel(5, 3)
+        self.specs_model = QStandardItemModel(len(columns),1)
 
         # Set headers (optional)
-        data_model.setHorizontalHeaderLabels(["Tourqe", "Angular Speed", "Timestamps"])
-        data_model.setVerticalHeaderLabels(["1", "2", "3", "overload", "Dwell"])
+        self.data_model.setHorizontalHeaderLabels(["Tourqe (N.m)", "Angular Speed (rpm)", "Timestamps(sec)"])
+        self.data_model.setVerticalHeaderLabels(["1", "2", "3", "overload", "Dwell"])
 
-        specs_model.setHorizontalHeaderLabels(["Specifications"])
-        specs_model.setVerticalHeaderLabels(columns)
+        self.specs_model.setHorizontalHeaderLabels(["Specifications"])
+        self.specs_model.setVerticalHeaderLabels(columns)
         # Attach model to your QTableView
-        self.ui.viewTable.setModel(data_model)
+        self.ui.dataTableView.setModel(self.data_model)
+        self.ui.driveTableView.setModel(self.specs_model)
 
-        def fill_table(self, table, data):
-            ''' Fill a QTableView with data 
-            
-            Parameters:
-            table (QTableView): The table to fill
-            data (list of list): 2D list containing the data to fill the table
-            '''
-            rows = table.rowCount()
-            cols = table.columnCount()
-            for row in range(rows):
-                for col in range(cols):
-                    data_model.setItem(row, col, QStandardItem(str(data[row][col])))
+    def fill_table(self, model, table, data):
+        ''' Fill a QTableView with data 
+        
+        Parameters:
+        table (QTableView): The table to fill
+        data (list of list): 2D list containing the data to fill the table
+        '''
+        rows = model.rowCount()
+        cols = model.columnCount()
+        print("hell:",rows,cols)
+        print(data)
+        for row in range(rows):
+            for col in range(cols):
+                model.setItem(row, col, QStandardItem(str(data[row][col])))
 
-            self.ui.viewTable.setModel(data_model)
+        table.setModel(model)
 

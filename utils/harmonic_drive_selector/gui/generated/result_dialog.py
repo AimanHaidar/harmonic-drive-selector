@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(608, 448)
+        Dialog.resize(794, 448)
         self.dataTableView = QtWidgets.QTableView(Dialog)
         self.dataTableView.setGeometry(QtCore.QRect(40, 220, 256, 192))
         self.dataTableView.setObjectName("dataTableView")
@@ -40,7 +40,7 @@ class Ui_Dialog(object):
         self.selection.setText("")
         self.selection.setObjectName("selection")
         self.driveTableView = QtWidgets.QTableView(Dialog)
-        self.driveTableView.setGeometry(QtCore.QRect(330, 41, 256, 371))
+        self.driveTableView.setGeometry(QtCore.QRect(330, 41, 451, 371))
         self.driveTableView.setObjectName("driveTableView")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(330, 10, 231, 19))
@@ -60,4 +60,4 @@ class Ui_Dialog(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.label.setText(_translate("Dialog", "your drive is :"))
         self.label_2.setText(_translate("Dialog", "drive specifications:"))
-import pic_rc
+from ..resources import pic_rc
