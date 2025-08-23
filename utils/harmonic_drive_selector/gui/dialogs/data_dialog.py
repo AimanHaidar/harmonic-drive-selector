@@ -15,7 +15,7 @@ class DataDialog(QtWidgets.QDialog):
         self.ui.json_s.clicked.connect(self.show_file_path)
         self.ui.buttonBox.accepted.disconnect()
         self.ui.buttonBox.accepted.connect(self.insert_data)
-        self.float_data = [[0]*self.ui.dataTable.columnCount()]*self.ui.dataTable.rowCount()
+        self.float_data = [[0 for _ in range(self.ui.dataTable.columnCount())] for _ in range(self.ui.dataTable.rowCount())]
 
         self.ui.dataTable.setItem(0, 0, QTableWidgetItem("400"))
         self.ui.dataTable.setItem(1, 0, QTableWidgetItem("320"))
@@ -48,21 +48,26 @@ class DataDialog(QtWidgets.QDialog):
     def insert_data(self):
         for col in range(self.ui.dataTable.columnCount()):
             for row in range(self.ui.dataTable.rowCount()):
+                #skip last row first two columns for lifetime and pause time
                 if row==self.ui.dataTable.rowCount()-1 and col == 0:
                     continue
                 if row==self.ui.dataTable.rowCount()-1 and col == 1:
                     continue
+
                 item = self.ui.dataTable.item(row, col)
                 if item is None or item.text() == "":
                     print(f"Empty cell at ({row+1},{col+1})")
                     non_numbers_dialog = NonNumbersDialog()
                     non_numbers_dialog.exec_()
                     return
+                
                 try:
+                    print(item.text())
                     self.float_data[row][col] = float(item.text())
                 except ValueError:
                     print(f"Invalid float at ({row+1},{col+1}): {item.text()}")
                     non_numbers_dialog = NonNumbersDialog()
                     non_numbers_dialog.exec_()
                     return
+        print(self.float_data)
         self.accept()
