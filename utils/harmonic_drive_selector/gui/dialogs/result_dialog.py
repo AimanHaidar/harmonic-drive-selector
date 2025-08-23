@@ -29,6 +29,12 @@ class ResultDialog(QtWidgets.QDialog):
         self.ui.viewTable.setModel(data_model)
 
         def fill_table(self, table, data):
+            ''' Fill a QTableView with data 
+            
+            Parameters:
+            table (QTableView): The table to fill
+            data (list of list): 2D list containing the data to fill the table
+            '''
             rows = table.rowCount()
             cols = table.columnCount()
             for row in range(rows):
