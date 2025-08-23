@@ -65,7 +65,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>your tourqe/angular speed data:</string>
+    <string>your torque/angular speed data:</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="dataTable">
@@ -110,7 +110,7 @@
    </row>
    <column>
     <property name="text">
-     <string>Tourqe</string>
+     <string>torque</string>
     </property>
    </column>
    <column>

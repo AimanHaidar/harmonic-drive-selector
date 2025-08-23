@@ -6,7 +6,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from data.reducers_tables import reducers_df
 
-def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HFUS",'Size': 11,'Ratio': 50}):
+def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HFUS",'Size': 11,'Ratio': 50}):
     """
         this function determine the validity of Reducer based on 
         the average cyclic load and the the opreation speed
@@ -17,7 +17,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
             type of reducer you need
 
         T : dictionary
-            {'dt' (timestamps): list,'T_cyclic': list,t_k (overload time): float ,'T_k'(overload Tourqe): float,'t_p' (Dwell time): float}.
+            {'dt' (timestamps): list,'T_cyclic': list,t_k (overload time): float ,'T_k'(overload torque): float,'t_p' (Dwell time): float}.
         
         n : dictionary
             {'n_cycle': *, 'n_k' (speed at overload): *}
@@ -52,7 +52,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
 
     T3nt = 0 # = |(T_1)^3*n_1|*t1+...+|(T_n)^3*n_n|*t_n
     nt = 0 # = n_1*t1+...+n_n*t_n
-    #this loop calulate the average tourqe T_av
+    #this loop calulate the average torque T_av
     for T_i,n_i,dt in zip(T['T_cycle'],n['n_cycle'],T['dt']):
         T3nt += abs(T_i**3*n_i)*dt
         nt += abs(n_i)*dt
@@ -86,7 +86,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
             continue
 
         # Determination of the maximum torque from load cycle
-        R_T_max = max(T['T_cycle']) # repeted maximum tourqe from cycle
+        R_T_max = max(T['T_cycle']) # repeted maximum torque from cycle
         T_R = reducers_df.loc[gear_index,"Limit for repeated peak torque [Nm]"]
         # Checking the permissible repeated peak torque Tmax ≤ TR
         if R_T_max > T_R:
@@ -109,7 +109,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
 
         # Checking the Wave Generator bearing lifetime 
         # Calculated lifetime L10h > required lifetime L10 req.
-        n_N = 2000 # speed at rated tourqe
+        n_N = 2000 # speed at rated torque
         T_N = reducers_df.loc[gear_index,"Rated torque at rated speed 2000 rpm [Nm]"]
         L_n = 10000 # Nominal lifetime
         L_10 = L_n*(n_N/input_n_av)*(T_N/T_av)**3
@@ -128,5 +128,5 @@ n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
-print(tourqe_based_dimensioning("CSG",T,n,L_req,first_selection = {'Series': "CSG",'Size': 40,'Ratio': 120}))
+print(torque_based_dimensioning("CSG",T,n,L_req,first_selection = {'Series': "CSG",'Size': 40,'Ratio': 120}))
 

@@ -20,7 +20,7 @@ class ResultDialog(QtWidgets.QDialog):
         self.specs_model = QStandardItemModel(len(columns),1)
 
         # Set headers (optional)
-        self.data_model.setHorizontalHeaderLabels(["Tourqe (N.m)", "Angular Speed (rpm)", "Timestamps(sec)"])
+        self.data_model.setHorizontalHeaderLabels(["torque (N.m)", "Angular Speed (rpm)", "Timestamps(sec)"])
         self.data_model.setVerticalHeaderLabels(["1", "2", "3", "overload", "Dwell"])
 
         self.specs_model.setHorizontalHeaderLabels(["Specifications"])

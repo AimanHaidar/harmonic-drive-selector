@@ -13,7 +13,7 @@ from gui.dialogs.input_lifetime_dialog import InputLifetimeDialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 from gui.dialogs.result_dialog import ResultDialog
 
-from src.harmonic_dasigner import tourqe_based_dimensioning
+from src.harmonic_dasigner import torque_based_dimensioning
 from data.reducers_tables import reducers_df
 
 import sys
@@ -88,9 +88,9 @@ class HarmonicSelctorApp(QMainWindow):
                 return
             self.lifetime = input_lifetime_dialog.lifetime
             if first_selection_mode:
-                self.selection = tourqe_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection)
+                self.selection = torque_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection)
             else:
-                self.selection = tourqe_based_dimensioning(self.type,self.T,self.n,self.lifetime)
+                self.selection = torque_based_dimensioning(self.type,self.T,self.n,self.lifetime)
             
             print(self.selection)
             drive_specs = reducers_df[(reducers_df["Series"] == self.selection.split("-")[0]) & (reducers_df["Size"] == int(self.selection.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection.split("-")[2]))]

@@ -1,5 +1,5 @@
 # Harmonic Drive Selector
-This is a Harmonic Drive app build with qt5 allow engineers to easly select the appropriat drive for thier application by inpouting tourqe and angular speed data for thier load
+This is a Harmonic Drive app built with Qt5 that allows engineers to easily select the appropriate drive for their application by inputting torque and angular speed data for their load.
 
 ## Screenshots
 ![Description of image](screenshots/main_window.png)
@@ -20,31 +20,31 @@ uv sync
 ```
 
 3. **now you have two options to run:**
-    - using directly the main.py
+    - **option 1:** using directly the main.py
     ```bash
     uv run main.py
     ```
 
-    - building the project and get one exeutable file using pyinstaller
+    - **option 2:** building the project and get one exeutable file using pyinstaller
 
-    1. install pyinstall in your vevn
+        1. install pyinstall in your vevn
 
-    ```bash
-        uv add pyinstall
-    ```
-    2. run this command
-
-        ##### Linux:
         ```bash
-        .venv/bin/python -m PyInstaller --onefile main.py
+            uv add pyinstall
         ```
+        2. run this command
 
-        ##### Windows:
-        ```powershell
-        .venv\Scripts\python.exe -m PyInstaller --onefile --windowed main.py
-        ```
+            ##### Linux:
+            ```bash
+            .venv/bin/python -m PyInstaller --onefile main.py
+            ```
 
-    it will create dist folder contain the executable
+            ##### Windows:
+            ```powershell
+            .venv\Scripts\python.exe -m PyInstaller --onefile --windowed main.py
+            ```
+
+        this will create dist folder contain the executable
 
 
 
