@@ -41,7 +41,7 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
     except Exception as e:
         raise Exception("your first selection is not in the table!")
 
-    if first_selection == {'Series': "HFUS",'Size': 11,'Ratio': 50} and type == "HFUS":
+    if first_selection == {'Series': "HFUS",'Size': 11,'Ratio': 50} and type != "HFUS":
         # Condition: column 'Series' equal type of gear
         condition = reducers_df["Series"] == type
         # Get first index satisfying the condition
@@ -122,12 +122,11 @@ def tourqe_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
 
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
-'''
+
 T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
 n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
-print(tourqe_based_dimensioning("SHG",T,n,L_req,{'Series': "SHG",'Size': 14,'Ratio': 50}))
+print(tourqe_based_dimensioning("SHG",T,n,L_req))
 
-'''
