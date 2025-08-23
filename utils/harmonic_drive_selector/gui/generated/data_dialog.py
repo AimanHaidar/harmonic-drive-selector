@@ -54,10 +54,13 @@ class Ui_Dialog(object):
         self.dataTable.horizontalHeader().setDefaultSectionSize(110)
         self.file_path = QtWidgets.QLineEdit(Dialog)
         self.file_path.setEnabled(True)
-        self.file_path.setGeometry(QtCore.QRect(30, 100, 391, 31))
+        self.file_path.setGeometry(QtCore.QRect(90, 100, 351, 31))
         self.file_path.setFrame(True)
         self.file_path.setClearButtonEnabled(False)
         self.file_path.setObjectName("file_path")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(20, 100, 66, 31))
+        self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
@@ -86,3 +89,4 @@ class Ui_Dialog(object):
         item.setText(_translate("Dialog", "Angular Speed"))
         item = self.dataTable.horizontalHeaderItem(2)
         item.setText(_translate("Dialog", "Timestapm"))
+        self.label_2.setText(_translate("Dialog", "file path:"))

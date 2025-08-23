@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="pic.qrc">:/pictures/pictures/CSG_photo.png</pixmap>
+     <pixmap>:/pictures/pictures/CSG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -46,7 +46,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="pic.qrc">:/pictures/pictures/SHG_photo.png</pixmap>
+     <pixmap>:/pictures/pictures/SHG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -179,6 +179,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
+  <include location="../resources/pic.qrc"/>
   <include location="pic.qrc"/>
  </resources>
  <connections/>
