@@ -180,7 +180,7 @@
  </widget>
  <resources>
   <include location="../resources/pic.qrc"/>
-  <include location="pic.qrc"/>
+  <include location="../resources/pic.qrc"/>
  </resources>
  <connections/>
 </ui>
