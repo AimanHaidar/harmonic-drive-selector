@@ -36,8 +36,15 @@ class HarmonicSelctorApp(QMainWindow):
         self.ui.exit_pushButton.clicked.connect(self.close)
 
     def start_selection(self):
+        ''' This function is called when the start button is clicked 
+        it opens a dialog to select the type of harmonic drive and then opens
+        the data input dialog and then the lifetime input dialog and finally shows the result dialog
+        for the Data
+        '''
+        # create dialog it ask user if he had selected a harmonic drive before or not
         first_selection_dialog = FirstSelectionDialog()
         first_selection = first_selection_dialog.exec_()
+
         proceed = True
         first_selection_mode = False
         if  first_selection == first_selection_dialog.Rejected:
@@ -62,45 +69,51 @@ class HarmonicSelctorApp(QMainWindow):
             except AttributeError:
                 pass
             if selection_input_dialog.Rejected == state:
-                proceed = False
-
-        if proceed:
-            self.data = self.input_data()
-            if not self.data:
                 return
-            self.T = {}
-            self.T = {}
-            self.T['T_cycle'] = [self.data[0][0], self.data[1][0], self.data[2][0]]
 
-            self.T['T_k']     = self.data[3][0]
-            self.T['t_k']     = self.data[3][2]
-            self.T['t_p']     = self.data[4][2]
-            self.T['dt'] = [self.data[0][2], self.data[1][2], self.data[2][2]]
+        self.data = self.input_data()
+        if not self.data:
+            return
+        # Combine T and n into one load_data dictionary
+        self.load_data = {
+            'T_cycle': [self.data[0][0], self.data[1][0], self.data[2][0]],
+            'T_k': self.data[3][0],
+            't_k': self.data[3][2],
+            't_p': self.data[4][2],
+            'dt': [self.data[0][2], self.data[1][2], self.data[2][2]],
+            'n_cycle': [self.data[0][1], self.data[1][1], self.data[2][1]],
+            'n_k': self.data[3][1]
+        }
 
-            self.n = {}
-            self.n['n_cycle'] = [self.data[0][1], self.data[1][1], self.data[2][1]]
-            self.n['n_k']     = self.data[3][1]
 
-
-            input_lifetime_dialog = InputLifetimeDialog()
-            state = input_lifetime_dialog.exec_()
-            if state == input_lifetime_dialog.Rejected:
-                return
-            self.lifetime = input_lifetime_dialog.lifetime
-            if first_selection_mode:
-                self.selection = torque_based_dimensioning(self.first_selection['Series'],self.T,self.n,self.lifetime,self.first_selection)
-            else:
-                self.selection = torque_based_dimensioning(self.type,self.T,self.n,self.lifetime)
-            
-            print(self.selection)
-            drive_specs = reducers_df[(reducers_df["Series"] == self.selection.split("-")[0]) & (reducers_df["Size"] == int(self.selection.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection.split("-")[2]))]
-            drive_specs = drive_specs.to_numpy().transpose()
-            result_dialog = ResultDialog()
-            result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.data)
-            result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
-            result_dialog.ui.selection.setText((self.selection))
-            result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/"+self.selection.split("-")[0]+"_photo.png"))
-            result_dialog.exec_()
+        input_lifetime_dialog = InputLifetimeDialog()
+        state = input_lifetime_dialog.exec_()
+        if state == input_lifetime_dialog.Rejected:
+            return
+        self.lifetime = input_lifetime_dialog.lifetime
+        if first_selection_mode:
+            self.selection = torque_based_dimensioning(
+                self.first_selection['Series'],
+                self.load_data,
+                self.lifetime,
+                self.first_selection
+            )
+        else:
+            self.selection = torque_based_dimensioning(
+                self.type,
+                self.load_data,
+                self.lifetime
+            )
+        
+        print(self.selection)
+        drive_specs = reducers_df[(reducers_df["Series"] == self.selection.split("-")[0]) & (reducers_df["Size"] == int(self.selection.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection.split("-")[2]))]
+        drive_specs = drive_specs.to_numpy().transpose()
+        result_dialog = ResultDialog()
+        result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.data)
+        result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
+        result_dialog.ui.selection.setText((self.selection))
+        result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/"+self.selection.split("-")[0]+"_photo.png"))
+        result_dialog.exec_()
             
 
     def show_about(self):
