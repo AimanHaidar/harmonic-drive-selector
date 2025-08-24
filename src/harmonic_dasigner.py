@@ -163,13 +163,15 @@ def torque_based_dimensioning(type,load_data,L_10_req,first_selection = {'Series
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
 
-def stiffness_based_dimensioning(application,J):
+def stiffness_based_dimensioning(preselection,application,J):
     '''
     evaluates the ratio of the load moment of inertial to the stiffness of the
     gear and compares it to the application requirements.
 
     Parameters
     --------------
+    preselection : str
+        preselection of the gear
     application : str
         type of application you use the gear for
     J : float
@@ -180,7 +182,11 @@ def stiffness_based_dimensioning(application,J):
     gear : string 
         gear model
     '''
-    global gear_index
+    #just to find the preselection index in table with minimum editing
+    first_selection = preselection.split("-")
+    result = reducers_df[(reducers_df["Series"] == first_selection[0]) & (reducers_df["Size"] == int(first_selection[1])) & (reducers_df["Ratio"] == int(first_selection[2]))]
+    gear_index = (result.index.values[0])
+
     # calculation of the resonance frequency of the drive
     while 1:
         try:
@@ -207,7 +213,7 @@ def stiffness_based_dimensioning(application,J):
             raise Exception("no suitable gear found for SHG, try to change your type of gear")
         break
     
-    return str(reducers_df.loc[gear_index, "Series"]) + "-" + str(reducers_df.loc[gear_index, 'Size']) + "-" + str(reducers_df.loc[gear_index, 'Ratio']) + "-" + "2UH"
+    return str(gear_series) + "-" + str(gear_size) + "-" + str(gear_ratio) + "-" + "2UH"
 
 def torsional_angel(gear,load):
     '''
@@ -243,7 +249,7 @@ def torsional_angel(gear,load):
     
     return angle
 
-def output_bearing_dimensioning(F_tilting,L_r,L_a,R,operating_factor,static_factor,L_10_req):
+def output_bearing_dimensioning(preselection,F_tilting,L_r,L_a,R,operating_factor,static_factor,L_10_req):
     '''
     this function determine the validity of output bearing based on the gear selected
 
@@ -260,7 +266,12 @@ def output_bearing_dimensioning(F_tilting,L_r,L_a,R,operating_factor,static_fact
     R : float
         distance from the center of the output bearing to the center of the gear in output
     '''
-    global gear_index
+
+    #just to find the preselection index in table with minimum editing
+    first_selection = preselection.split("-")
+    result = reducers_df[(reducers_df["Series"] == first_selection[0]) & (reducers_df["Size"] == int(first_selection[1])) & (reducers_df["Ratio"] == int(first_selection[2]))]
+    gear_index = (result.index.values[0])
+
     while 1:
         try:
             gear_series = reducers_df.loc[gear_index, "Series"]
@@ -326,8 +337,7 @@ def output_bearing_dimensioning(F_tilting,L_r,L_a,R,operating_factor,static_fact
         if gear_index == last_shg_index:
             raise Exception("no suitable gear found for SHG, try to change your type of gear")
         break
-    return str(reducers_df.loc[gear_index, "Series"]) + "-" + str(reducers_df.loc[gear_index, 'Size']) + "-" + str(reducers_df.loc[gear_index, 'Ratio']) + "-" + "2UH"
-           
+    return str(gear_series) + "-" + str(gear_size) + "-" + str(gear_ratio) + "-" + "2UH"
 
 load_data = {
     'dt': [0.3, 3, 0.4],
@@ -339,12 +349,14 @@ load_data = {
     'n_k': 14
 }
 
-'''
+
 L_req = 15000
 
-print(torque_based_dimensioning("CSG", load_data, L_req, first_selection={'Series': "CSG", 'Size': 40, 'Ratio': 120}))
-print(stiffness_based_dimensioning("Milling heads for woodworking (hardwood etc.)", 7))
-print(torsional_angel("SHG-20-50-2UH",100))
+s1 = torque_based_dimensioning("CSG", load_data, L_req, first_selection={'Series': "CSG", 'Size': 40, 'Ratio': 120})
+print(s1)
+s2 = stiffness_based_dimensioning(s1,"Milling heads for woodworking (hardwood etc.)", 7)
+print(s2)
+print(torsional_angel(s2,100))
 F_tilting = {
     'dt': [0.3, 3, 0.4],
     'Fr_cycle': [1000, 3000, 2000],
@@ -359,5 +371,4 @@ L_a = 1.5
 R = 0.04
 a = [Fr* (L_r + R) + Fa * L_a for Fr, Fa in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'])]
 print(a)
-print(output_bearing_dimensioning(F_tilting,L_r,L_a,R,1.2,1.5,L_req))
-'''
+print(output_bearing_dimensioning(s2,F_tilting,L_r,L_a,R,1.2,1.5,L_req))
