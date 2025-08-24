@@ -227,6 +227,101 @@ resonance_frequency = {
     "Milling heads for woodworking (hardwood etc.)": 30.0
 }
 
+import pandas as pd
+
+# --- SHG table ---
+shg_data = {
+    "Symbol [Unit]": [
+        "Pitch circle diameter d_p [m]",
+        "Distance R [m]",
+        "Dynamic load rating C [N]",
+        "Static load rating C0 [N]",
+        "Permissible dynamic tilting moment M [Nm]",
+        "Tilting moment stiffness K_B [Nm/arcmin]",
+        "Permissible axial load F_a [N]",
+        "Permissible radial load F_r [N]"
+    ],
+    11: [0.043, 0.0180, 5290, 7550, 74, 19, 1130, 757],
+    14: [0.050, 0.0217, 5800, 8600, 74, 25, 1239, 830],
+    17: [0.060, 0.0239, 10400, 16300, 124, 45, 2222, 1489],
+    20: [0.070, 0.0255, 14600, 20000, 187, 74, 3119, 2090],
+    25: [0.085, 0.0296, 21800, 35800, 258, 114, 4657, 3120],
+    32: [0.111, 0.0364, 38200, 65400, 580, 290, 8161, 5468],
+    40: [0.133, 0.0440, 43300, 81600, 849, 522, 9250, 6198],
+    45: [0.154, 0.0475, 77600, 135000, 1127, 749, 16578, 11107],
+    50: [0.170, 0.0525, 81600, 149000, 1487, 1020, 17433, 11680],
+    58: [0.195, 0.0622, 87400, 171000, 2180, 1550, 18672, 12510],
+    65: [0.218, 0.0720, 130000, 223000, 2740, 2155, 27773, 18608]
+}
+
+# --- CSG table ---
+csg_data = {
+    "Symbol [Unit]": [
+        "Pitch circle diameter d_p [m]",
+        "Distance R [m]",
+        "Dynamic load rating C [N]",
+        "Static load rating C0 [N]",
+        "Permissible dynamic tilting moment M [Nm]",
+        "Tilting moment stiffness K_B [Nm/arcmin]",
+        "Permissible axial load F_a [N]",
+        "Permissible radial load F_r [N]"
+    ],
+    14: [0.035, 0.0095, 4700, 6070, 41, 13, 1004, 673],
+    17: [0.0425, 0.0095, 5290, 7550, 64, 22.5, 1130, 757],
+    20: [0.050, 0.0095, 5780, 9000, 91, 37, 1235, 827],
+    25: [0.062, 0.0115, 9600, 15100, 156, 70, 2051, 1374],
+    32: [0.080, 0.0130, 15000, 25000, 313, 157, 3205, 2147],
+    40: [0.096, 0.0145, 21300, 36500, 450, 265, 4550, 3049],
+    45: [0.111, 0.0155, 23000, 42600, 686, 410, 4914, 3292],
+    50: [0.119, 0.0180, 34800, 60200, 759, 497, 7435, 4981],
+    58: [0.141, 0.0205, 51800, 90400, 1180, 823, 11066, 7414],
+    65: [0.160, 0.0225, 55600, 103000, 1860, 1175, 11878, 7958],
+    80: [0.185, 0.0260, 76400, 143000, 2740, 1900, 16322, 10936],
+    90: [0.214, 0.0285, 83200, 168000, 4210, 2943, 17582, 11780]
+}
+
+# --- CSG-LW table ---
+csglw_data = {
+    "Symbol [Unit]": [
+        "Pitch circle diameter d_p [m]",
+        "Distance R [m]",
+        "Dynamic load rating C [N]",
+        "Static load rating C0 [N]",
+        "Permissible dynamic tilting moment M [Nm]",
+        "Tilting moment stiffness K_B [Nm/arcmin]",
+        "Permissible axial load F_a [N]",
+        "Permissible radial load F_r [N]"
+    ],
+    14: [0.035, 0.0093, 4700, 6070, 33.6, 10.5, 1004, 673],
+    17: [0.043, 0.0091, 5290, 7550, 52.5, 18.6, 1130, 757],
+    20: [0.050, 0.0098, 5780, 9000, 74.6, 30.5, 1235, 827],
+    25: [0.064, 0.0118, 9600, 15100, 127.9, 57.6, 2051, 1374],
+    32: [0.083, 0.0133, 15000, 25000, 256.7, 128.6, 3205, 2147],
+    40: [0.096, 0.0148, 21300, 36500, 369.0, 217, 4550, 3049],
+    45: [0.111, 0.0158, 23000, 42600, 562.5, 336, 4914, 3292],
+    50: [0.119, 0.0180, 34800, 60200, 622, 407, 7435, 4981],
+    58: [0.141, 0.0205, 51800, 90400, 838, 585, 11066, 7414],
+    65: [0.160, 0.0185, 55600, 103000, 1525, 963, 11878, 7958]
+}
+
+df_shg = pd.DataFrame(shg_data).set_index("Symbol [Unit]")
+df_csg = pd.DataFrame(csg_data).set_index("Symbol [Unit]")
+df_csglw = pd.DataFrame(csglw_data).set_index("Symbol [Unit]")
+
+output_bearing_data = {
+    "SHG": df_shg,
+    "HFUS": df_shg,  # HFUS has the same data as SHG
+    "CSG": df_csg,
+    "HFUC": df_csg,  # HFUC has the same data as CSG
+    "CSG-LW": df_csglw
+}
+
+# Show results
+print("SHG bearings:\n", df_shg, "\n")
+print("CSG bearings:\n", df_csg, "\n")
+print("CSG-LW bearings:\n", df_csglw, "\n")
+
+
 
 # Create DataFrame
 reducers_df = pd.DataFrame(reducers_data, columns=columns)
