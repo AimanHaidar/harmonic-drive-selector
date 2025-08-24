@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>158</height>
+    <width>312</width>
+    <height>152</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,12 +40,142 @@
    </property>
    <item>
     <property name="text">
-     <string>hell</string>
+     <string>Slowly rotating turntables</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>hell2</string>
+     <string>Base axes of slow moving welding robots (not laser welding)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Slowly rotating welding turntables</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Gantry robot axes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Base axes of revolute robots</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hand axes of revolute robots with low requirements regarding dynamic performance</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tool revolvers</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tool magazines</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Swivelling and positioning axes in medical and measuring devices</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Standard applications in general mechanical engineering</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tilting axes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Palette changers</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>High dynamic tool changers</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Revolvers and magazines</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hand axes of revolute robots</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Scara robots</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Gantry robots</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Polishing robots</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Dynamic welding turntables</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Base axes of welding robots (laser welding)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Swivelling and positioning axes of medical equipment</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>B / C axes in 5 axis grinding machines</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Welding robot hand axes (laser welding)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Milling heads for plastics machining</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>C axes in turning machines</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Milling heads light metal machining</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Milling heads wood machining (chipboards etc.)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Milling heads for woodworking (hardwood etc.)</string>
     </property>
    </item>
   </widget>
@@ -53,10 +183,15 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>29</y>
+     <y>20</y>
      <width>311</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>chose your application:</string>
