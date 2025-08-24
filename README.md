@@ -15,11 +15,13 @@ cd harmonic-drive-selector
 
 2. **add the requirements of the  project**
 due to uv lock user to install pyqt5-qt5 with pyqt5 windows show issue when use uvlock.
-#####Linux and MacOS
+
+##### Linux and MacOS
 ```bash
 uv sync
 ```
-#####Windows
+
+##### Windows
 ```cmd
 # source your enviroment first if you want
 pip install -r requirements-win-txt
@@ -27,10 +29,12 @@ pip install -r requirements-win-txt
 
 3. **now you have two options to run:**
     - **option 1:** using directly the main.py
+      
     ##### Linux and MacOs
     ```bash
     uv run main.py
     ```
+    
     ##### Windows
     ```cmd
     python -m main
@@ -38,7 +42,7 @@ pip install -r requirements-win-txt
 
     - **option 2:** building the project and get one exeutable file using pyinstaller
 
-        1. install pyinstall in your vevn
+        1. install pyinstall in your venv
 
         ```bash
             uv add pyinstall
@@ -52,6 +56,7 @@ pip install -r requirements-win-txt
 
             ##### Windows:
             ```powershell
+            # in the enviroment you installed the requirements
             python -m PyInstaller --onefile --windowed main.py
             ```
 
