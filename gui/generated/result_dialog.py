@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/result_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/result_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -22,7 +22,10 @@ class Ui_Dialog(object):
         self.textBrowser.setGeometry(QtCore.QRect(40, 180, 256, 31))
         self.textBrowser.setObjectName("textBrowser")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(20, 10, 91, 19))
+        self.label.setGeometry(QtCore.QRect(20, 10, 121, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
         self.label.setObjectName("label")
         self.drive_photo = QtWidgets.QLabel(Dialog)
         self.drive_photo.setGeometry(QtCore.QRect(100, 40, 131, 131))
@@ -43,7 +46,10 @@ class Ui_Dialog(object):
         self.driveTableView.setGeometry(QtCore.QRect(330, 41, 451, 371))
         self.driveTableView.setObjectName("driveTableView")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(330, 10, 231, 19))
+        self.label_2.setGeometry(QtCore.QRect(330, 0, 231, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Dialog)

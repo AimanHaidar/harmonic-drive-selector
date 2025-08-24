@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/type_inform_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/type_inform_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -14,15 +14,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(512, 112)
+        Dialog.resize(512, 116)
+        self.harmonic_type = QtWidgets.QLabel(Dialog)
+        self.harmonic_type.setGeometry(QtCore.QRect(0, 20, 511, 20))
+        self.harmonic_type.setAlignment(QtCore.Qt.AlignCenter)
+        self.harmonic_type.setObjectName("harmonic_type")
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(40, 70, 301, 31))
+        self.buttonBox.setGeometry(QtCore.QRect(180, 70, 161, 27))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.harmonic_type = QtWidgets.QLabel(Dialog)
-        self.harmonic_type.setGeometry(QtCore.QRect(20, 40, 481, 19))
-        self.harmonic_type.setObjectName("harmonic_type")
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept) # type: ignore

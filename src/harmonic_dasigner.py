@@ -6,6 +6,8 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from data.reducers_tables import reducers_df
 
+from math import pi
+
 def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HFUS",'Size': 11,'Ratio': 50}):
     """
         this function determine the validity of Reducer based on 
@@ -123,10 +125,18 @@ def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
 
-T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
+def stiffness_based_dimensioning():
+    '''
+    evaluates the ratio of the load moment of inertial to the stiffness of the
+    gear and compares it to the application requirements.
+    '''
+    #calculation of the resonace frequency of the drive
+    f_n = (1/(2*pi))*((K_1/J)**0.5)
+
+'''T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
 n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
 print(torque_based_dimensioning("CSG",T,n,L_req,first_selection = {'Series': "CSG",'Size': 40,'Ratio': 120}))
-
+'''

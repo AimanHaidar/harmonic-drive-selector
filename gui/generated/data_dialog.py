@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/data_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/data_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -27,7 +27,7 @@ class Ui_Dialog(object):
         self.json_s.setGeometry(QtCore.QRect(340, 0, 91, 41))
         self.json_s.setObjectName("json_s")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(10, 10, 221, 21))
+        self.label.setGeometry(QtCore.QRect(10, -10, 221, 61))
         self.label.setObjectName("label")
         self.dataTable = QtWidgets.QTableWidget(Dialog)
         self.dataTable.setGeometry(QtCore.QRect(30, 50, 401, 131))

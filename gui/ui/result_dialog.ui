@@ -46,9 +46,14 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>91</width>
-     <height>19</height>
+     <width>121</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>your drive is :</string>
@@ -107,10 +112,15 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>10</y>
+     <y>0</y>
      <width>231</width>
-     <height>19</height>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>drive specifications:</string>

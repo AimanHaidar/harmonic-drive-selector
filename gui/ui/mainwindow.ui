@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/pictures/pictures/CSG_photo.png</pixmap>
+     <pixmap resource="../resources/pic.qrc">:/pictures/pictures/CSG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -46,7 +46,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/pictures/pictures/SHG_photo.png</pixmap>
+     <pixmap resource="../resources/pic.qrc">:/pictures/pictures/SHG_photo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -93,7 +93,7 @@
      <rect>
       <x>160</x>
       <y>40</y>
-      <width>481</width>
+      <width>601</width>
       <height>21</height>
      </rect>
     </property>

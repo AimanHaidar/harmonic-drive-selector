@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drives-selector/utils/harmonic_drive_selector/gui/ui/mainwindow.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.SHG_label.setFont(font)
         self.SHG_label.setObjectName("SHG_label")
         self.Title = QtWidgets.QLabel(self.centralwidget)
-        self.Title.setGeometry(QtCore.QRect(160, 40, 481, 21))
+        self.Title.setGeometry(QtCore.QRect(160, 40, 601, 21))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)

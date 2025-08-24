@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/utils/harmonic_drive_selector/gui/ui/first_selection_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/first_selection_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -22,7 +22,7 @@ class Ui_Dialog(object):
         self.no_button.setGeometry(QtCore.QRect(100, 90, 88, 27))
         self.no_button.setObjectName("no_button")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(90, 40, 361, 20))
+        self.label_2.setGeometry(QtCore.QRect(90, 50, 361, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_2.setFont(font)
