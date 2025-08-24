@@ -4,35 +4,39 @@ from pathlib import Path
 # Add data to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from data.reducers_tables import reducers_df,resonance_frequency,torsional_data
+from data.reducers_tables import reducers_df,resonance_frequency,torsional_data,output_bearing_data
 from math import pi
 
 gear_index = 0
 
-def average(load_data):
+def average(load_data,F="T_cycle",n="n_cycle",B=3):
+
     '''
     this function calculates the average based on the load cycle
+    ( ((|n1|*t1*(|F1|^(B)+...+|nn|*tn*|(Fn)|^(B)))^(1/B)) /((|)n1|*t1+...+|nn|*tn)^(1/B)) )
+
+
     Parameters
     --------------
     load_data : dictionary
         Combined dictionary containing:
-        {'dt': list, 'T_cycle': list, 't_k': float, 'T_k': float, 't_p': float, 'n_cycle': list, 'n_k': float}
+        {'dt': list, 'T_cycle': list, 'n': list}
 
     Returns
     -------------
     T_av : float
         the average torque in Nm 
-    nt : float
+    n_av : float
         the average angular speed in rpm     
     '''
     # Combined T and n into load_data
-    T3nt = 0 # = |(T_1)^3*n_1|*t1+...+|(T_n)^3*n_n|*t_n
+    TBnt = 0 # = |(T_1)^B*n_1|*t1+...+|(T_n)^B*n_n|*t_n
     nt = 0 # = n_1*t1+...+n_n*t_n
-    for T_i, n_i, dt in zip(load_data['T_cycle'], load_data['n_cycle'], load_data['dt']):
-        T3nt += abs(T_i**3 * n_i) * dt
+    for T_i, n_i, dt in zip(load_data[F], load_data[n], load_data['dt']):
+        TBnt += abs(T_i**B * n_i) * dt
         nt += abs(n_i) * dt
-    T_av = (T3nt / nt) ** (1/3)
-    return T_av, nt
+    T_av = (TBnt / nt) ** (1/B)
+    return T_av, nt/(sum(load_data['dt']) + load_data['t_p'])
 
 def torque_based_dimensioning(type,load_data,L_10_req,first_selection = {'Series': "HFUS",'Size': 11,'Ratio': 50}):
     """
@@ -78,7 +82,7 @@ def torque_based_dimensioning(type,load_data,L_10_req,first_selection = {'Series
             raise Exception("type of gear should be the same as your first selection!")
 
     # Use combined load_data for average calculation
-    T_av, nt = average(load_data)
+    T_av, output_n_av = average(load_data)
 
     # main algorithm loop
     global gear_index
@@ -95,8 +99,11 @@ def torque_based_dimensioning(type,load_data,L_10_req,first_selection = {'Series
             continue
         
         # Calculation of the average output speed
-        i = reducers_df.loc[gear_index,"Ratio"]
-        input_n_av = i * (nt / (sum(load_data['dt']) + load_data['t_p']))
+        try:
+            i = reducers_df.loc[gear_index,"Ratio"]
+        except Exception as e:
+            raise Exception("no suitable gear found, try to change your first selection or the type of gear")
+        input_n_av = i * (output_n_av)
         n_av = reducers_df.loc[gear_index,"Limit for average input speed [rpm]"]
         # Checking the permissible average Input speed nin av ≤ nav (max)
         if n_av < input_n_av:
@@ -176,9 +183,13 @@ def stiffness_based_dimensioning(application,J):
     global gear_index
     # calculation of the resonance frequency of the drive
     while 1:
-        gear_series = reducers_df.loc[gear_index, "Series"]
-        gear_size = int(reducers_df.loc[gear_index, 'Size'])
-        gear_ratio = int(reducers_df.loc[gear_index, 'Ratio'])
+        try:
+            gear_series = reducers_df.loc[gear_index, "Series"]
+            gear_size = int(reducers_df.loc[gear_index, 'Size'])
+            gear_ratio = int(reducers_df.loc[gear_index, 'Ratio'])
+        except Exception as e:
+            raise Exception("no suitable gear found, try to change your first selection or the type of gear")
+        # Getting the required resonance frequency from the table based on the application
         f_res = resonance_frequency[application]
         # selecting the right column based on the gear ratio
         ratio = lambda x: 30 if x <= 30 else (50 if x <= 50 else 80)
@@ -198,7 +209,7 @@ def stiffness_based_dimensioning(application,J):
     
     return str(reducers_df.loc[gear_index, "Series"]) + "-" + str(reducers_df.loc[gear_index, 'Size']) + "-" + str(reducers_df.loc[gear_index, 'Ratio']) + "-" + "2UH"
 
-def torsional_angel(load):
+def torsional_angel(gear,load):
     '''
     this function determine the tortional angle based on the gear selected and the load applied
     
@@ -212,9 +223,9 @@ def torsional_angel(load):
     angle : float
         the tortional angle in armin    
     '''
-    gear_series = load.split("-")[0]
-    gear_size = int(load.split("-")[1])
-    gear_ratio = int(load.split("-")[2])
+    gear_series = gear.split("-")[0]
+    gear_size = int(gear.split("-")[1])
+    gear_ratio = int(gear.split("-")[2])
     #compute the tortional angle
     T_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T1 [Nm]"].values[0]
     T_2 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T2 [Nm]"].values[0]
@@ -232,21 +243,91 @@ def torsional_angel(load):
     
     return angle
 
-def output_bearing_dimensioning(F_tilting,L_r,L_a,R):
+def output_bearing_dimensioning(F_tilting,L_r,L_a,R,operating_factor,static_factor,L_10_req):
     '''
     this function determine the validity of output bearing based on the gear selected
+
+    Parameters
+    --------------
+    F_tilting : dict
+        dictionary containing the radial and axial loads on the output bearing in N
+        {'dt': list, 'Fr_cycle': list, 'Fa_cycle': list, 'Fr_max': float, 'Fa_max': float, 'n_cycle': list, 't_p': float}
+    
+    L_r : float
+        distance from the center of the output bearing to the point of action of Fr in axial direction
+    L_a : float
+        distance from the center of the output bearing to the point of action of Fa in radial direction
+    R : float
+        distance from the center of the output bearing to the center of the gear in output
     '''
-    Fr_max = F_tilting['Fr_max'] #N
-    Fa_max = F_tilting['Fa_max'] #N
-    M_max = Fr_max*(L_r+R) + Fa_max*L_a #Nm
-    B = 10.0/3.0 #only for crossed roller bearing
-    # If you want to use average for combined data, update accordingly
-    # Fr_av = average(F_tilting) #N
-    
+    global gear_index
+    while 1:
+        try:
+            gear_series = reducers_df.loc[gear_index, "Series"]
+            gear_size = int(reducers_df.loc[gear_index, 'Size'])
+            gear_ratio = int(reducers_df.loc[gear_index, 'Ratio'])
+        except Exception as e:
+            raise Exception("no suitable gear found, try to change your first selection or the type of gear")
 
+        Fr_max = F_tilting['Fr_max'] #N
+        Fa_max = F_tilting['Fa_max'] #N
+        M_max = Fr_max*(L_r+R) + Fa_max*L_a #Nm
+        B = 10.0/3.0 #only for crossed roller bearing
+        # calculat the average torque like ( ((|n1|*t1*(|F1|^(B)+...+|nn|*tn*|(Fn)|^(B)))^(1/B)) /((|)n1|*t1+...+|nn|*tn)^(1/B)) )
+        Fr_av, n_av = average(F_tilting,"Fr_cycle","n_cycle",B) #N
+        Fa_av, _ = average(F_tilting,"Fa_cycle","n_cycle",B) #N
+        # Calculate the average tilting moment on the bearing from Fr and Fa
+        M_tilting_data = {
+            'dt': F_tilting['dt'],
+            'M_cycle': [Fr * (L_r + R) + Fa * L_a for Fr, Fa in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'])],
+            'n_cycle': F_tilting['n_cycle'],
+            't_p': F_tilting['t_p']
+        }
+        M_av, _ = average(M_tilting_data, "M_cycle", "n_cycle", B) #Nm
 
-    
-    
+        # Getting the pitch circle diameter from the table
+        d_p = output_bearing_data[gear_series].loc["Pitch circle diameter d_p [m]", gear_size]
+        Far_factor = Fa_av / (Fr_av+2*M_av/(d_p)) 
+        #axial and radial force factor
+        x,y = 0,0
+        if Far_factor >=1.5:
+            x = 1
+            y = 0.45
+        else:
+            x = 0.67
+            y = 0.67
+        
+        # Calculating the equivalent dynamic bearing load
+        P_c = x*(Fr_av+2*M_av/(d_p)) + y*Fa_av #N
+        # Getting the dynamic load rating from the table
+        C = output_bearing_data[gear_series].loc["Dynamic load rating C [N]", gear_size]
+        f_w = operating_factor #operation factor for no impact load
+        # Calculating the bearing life
+        L_10 = 1e6/(60*n_av)*(C/P_c*f_w)**B #in hours
+
+        if L_10 < L_10_req: #min required lifetime for output bearing in hours
+            gear_index += 1
+            continue 
+
+        C_0 = output_bearing_data[gear_series].loc["Static load rating C0 [N]", gear_size]
+        P_0 = Fr_max + 2*M_max/(d_p) + 0.44*Fa_max #N
+        # Calculating the static safety factor
+        f_s = C_0 / P_0
+
+        
+
+        if f_s < static_factor:
+            gear_index += 1
+            continue
+        
+        # the last index for SHG table
+        result = reducers_df[(reducers_df["Series"] == "SHG") & (reducers_df["Size"] == 65) & (reducers_df["Ratio"] == 160)]
+        last_shg_index = (result.index.values[0])
+        if gear_index == last_shg_index:
+            raise Exception("no suitable gear found for SHG, try to change your type of gear")
+        break
+    return str(reducers_df.loc[gear_index, "Series"]) + "-" + str(reducers_df.loc[gear_index, 'Size']) + "-" + str(reducers_df.loc[gear_index, 'Ratio']) + "-" + "2UH"
+           
 
 load_data = {
     'dt': [0.3, 3, 0.4],
@@ -258,8 +339,25 @@ load_data = {
     'n_k': 14
 }
 
-# Combined T and n into load_data
+'''
 L_req = 15000
 
 print(torque_based_dimensioning("CSG", load_data, L_req, first_selection={'Series': "CSG", 'Size': 40, 'Ratio': 120}))
 print(stiffness_based_dimensioning("Milling heads for woodworking (hardwood etc.)", 7))
+print(torsional_angel("SHG-20-50-2UH",100))
+F_tilting = {
+    'dt': [0.3, 3, 0.4],
+    'Fr_cycle': [1000, 3000, 2000],
+    'Fa_cycle': [2000, 1000, 500],
+    'Fr_max': 800,
+    'Fa_max': 300,
+    'n_cycle': [7, 14, 7],
+    't_p': 0.2
+}
+L_r = 0.2
+L_a = 1.5
+R = 0.04
+a = [Fr* (L_r + R) + Fa * L_a for Fr, Fa in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'])]
+print(a)
+print(output_bearing_dimensioning(F_tilting,L_r,L_a,R,1.2,1.5,L_req))
+'''
