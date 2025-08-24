@@ -186,7 +186,7 @@ csg_torsional_data = pd.DataFrame({
 #SGH and HFUS have the same torsional data
 #CSG and HFUC have the same torsional data
 torsional_data = {
-    "SGH" : shg_torsional_data,
+    "SHG" : shg_torsional_data,
     "HFUS" : shg_torsional_data,
     "CSG" : csg_torsional_data,
     "HFUC" : csg_torsional_data
@@ -230,7 +230,7 @@ resonance_frequency = {
 import pandas as pd
 
 # --- SHG table ---
-shg_data = {
+shg_output_bearing_data = {
     "Symbol [Unit]": [
         "Pitch circle diameter d_p [m]",
         "Distance R [m]",
@@ -255,7 +255,7 @@ shg_data = {
 }
 
 # --- CSG table ---
-csg_data = {
+csg_output_bearing_data = {
     "Symbol [Unit]": [
         "Pitch circle diameter d_p [m]",
         "Distance R [m]",
@@ -281,7 +281,7 @@ csg_data = {
 }
 
 # --- CSG-LW table ---
-csglw_data = {
+csglw_output_bearing_data = {
     "Symbol [Unit]": [
         "Pitch circle diameter d_p [m]",
         "Distance R [m]",
@@ -304,24 +304,17 @@ csglw_data = {
     65: [0.160, 0.0185, 55600, 103000, 1525, 963, 11878, 7958]
 }
 
-df_shg = pd.DataFrame(shg_data).set_index("Symbol [Unit]")
-df_csg = pd.DataFrame(csg_data).set_index("Symbol [Unit]")
-df_csglw = pd.DataFrame(csglw_data).set_index("Symbol [Unit]")
+df_output_bearing_shg = pd.DataFrame(shg_output_bearing_data).set_index("Symbol [Unit]")
+df_output_bearing_csg = pd.DataFrame(csg_output_bearing_data).set_index("Symbol [Unit]")
+df_output_bearing_csglw = pd.DataFrame(csglw_output_bearing_data).set_index("Symbol [Unit]")
 
 output_bearing_data = {
-    "SHG": df_shg,
-    "HFUS": df_shg,  # HFUS has the same data as SHG
-    "CSG": df_csg,
-    "HFUC": df_csg,  # HFUC has the same data as CSG
-    "CSG-LW": df_csglw
+    "SHG": df_output_bearing_shg,
+    "HFUS": df_output_bearing_shg,  # HFUS has the same data as SHG
+    "CSG": df_output_bearing_csg,
+    "HFUC": df_output_bearing_csg,  # HFUC has the same data as CSG
+    "CSG-LW": df_output_bearing_csglw
 }
-
-# Show results
-print("SHG bearings:\n", df_shg, "\n")
-print("CSG bearings:\n", df_csg, "\n")
-print("CSG-LW bearings:\n", df_csglw, "\n")
-
-
 
 # Create DataFrame
 reducers_df = pd.DataFrame(reducers_data, columns=columns)
