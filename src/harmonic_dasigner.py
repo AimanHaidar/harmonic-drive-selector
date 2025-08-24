@@ -4,9 +4,10 @@ from pathlib import Path
 # Add data to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from data.reducers_tables import reducers_df
-
+from data.reducers_tables import reducers_df,resonance_frequency,torsional_data
 from math import pi
+
+gear_index = 0
 
 def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HFUS",'Size': 11,'Ratio': 50}):
     """
@@ -61,8 +62,12 @@ def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
     T_av = (T3nt/nt)**(1/3)
 
     # main algorithm loop
+    global gear_index
     gear_index = first_index
     while 1:
+        
+        if gear_index >= len(reducers_df):
+            return ("no suitable gear found, try to change your first selection or the type of gear")
         # Calculation of the average output speed
         T_A = reducers_df.loc[gear_index,"Limit for average torque [Nm]"]
         
@@ -120,23 +125,65 @@ def torque_based_dimensioning(type,T,n,L_10_req,first_selection = {'Series': "HF
         if L_10_req > L_10:
             gear_index+=1
 
+        
+        # the last index for SHG table
+        result = reducers_df[(reducers_df["Series"] == "SHG") & (reducers_df["Size"] == 65) & (reducers_df["Ratio"] == 160)]
+        last_shg_index = (result.index.values[0])
+        if gear_index == last_shg_index:
+            raise Exception("no suitable gear found for SHG, try to change your type of gear")
+
         break
 
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
 
-def stiffness_based_dimensioning():
+def stiffness_based_dimensioning(application,J):
     '''
     evaluates the ratio of the load moment of inertial to the stiffness of the
     gear and compares it to the application requirements.
     '''
+    global gear_index
     #calculation of the resonace frequency of the drive
-    f_n = (1/(2*pi))*((K_1/J)**0.5)
+    while 1:
+        gear_series = reducers_df.loc[gear_index,"Series"]
+        gear_size = int(reducers_df.loc[gear_index,'Size'])
+        gear_ratio = int(reducers_df.loc[gear_index,'Ratio'])
+        f_res = resonance_frequency[application]
+        # selecting the right column based on the gear ratio
+        ratio = lambda x: 30 if x <= 30 else (50 if x <= 50 else 80)
+        K_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K1_i"+str(ratio(gear_ratio))+" [x10^4 Nm/rad]"].values[0]*1e4 #Nm/rad
+        f_n = (1/(2*pi))*((K_1/J)**0.5) #working resonance frequency in Hz
+        # Checking the permissible resonance frequency fn ≥ fres
+        if f_n < f_res:
+            gear_index+=1
+            continue
 
-'''T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
+        # the last index for SHG table
+        result = reducers_df[(reducers_df["Series"] == "SHG") & (reducers_df["Size"] == 65) & (reducers_df["Ratio"] == 160)]
+        last_shg_index = (result.index.values[0])
+        if gear_index == last_shg_index:
+            raise Exception("no suitable gear found for SHG, try to change your type of gear")
+        break
+    
+    return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
+
+def output_bearing_dimensioning(gear):
+    '''
+    this function determine the output bearing based on the gear selected
+    '''
+    try:
+        result = reducers_df[(reducers_df["Series"] == gear["Series"]) & (reducers_df["Size"] == gear['Size']) & (reducers_df["Ratio"] == gear['Ratio'])]
+        index = (result.index.values[0])
+    except Exception as e:
+        raise Exception("your gear is not in the table!")
+
+    bearing_type = reducers_df.loc[index,"Output bearing type"]
+    return bearing_type
+
+T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
 n = {'n_cycle': [7,14,7], 'n_k': 14}
 
 L_req = 15000
 
 print(torque_based_dimensioning("CSG",T,n,L_req,first_selection = {'Series': "CSG",'Size': 40,'Ratio': 120}))
-'''
+print(stiffness_based_dimensioning("Milling heads for woodworking (hardwood etc.)",7))
