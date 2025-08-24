@@ -153,38 +153,80 @@ reducers_data = [
 ]
 
 import pandas as pd
+shg_torsional_data = pd.DataFrame({
+        "Size": [11, 14, 17, 20, 25, 32, 40, 45, 50, 58, 65],
+        "T1 [Nm]": [0.8, 2.0, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235],
+        "T2 [Nm]": [2.0, 6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843],
+        "K3_i30 [x10^4 Nm/rad]": [None, 0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None],
+        "K2_i30 [x10^4 Nm/rad]": [None, 0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None],
+        "K1_i30 [x10^4 Nm/rad]": [None, 0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None],
+        "K3_i50 [x10^4 Nm/rad]": [0.32, 0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, None],
+        "K2_i50 [x10^4 Nm/rad]": [0.30, 0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, None],
+        "K1_i50 [x10^4 Nm/rad]": [0.22, 0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, None],
+        "K3_i80 [x10^4 Nm/rad]": [0.44, 0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0],
+        "K2_i80 [x10^4 Nm/rad]": [0.34, 0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0],
+        "K1_i80 [x10^4 Nm/rad]": [0.27, 0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0],
+    })
 
-# SHG table
-shg_data = {
-    "Size": [11, 14, 17, 20, 25, 32, 40, 45, 50, 58, 65],
-    "T1 [Nm]": [0.8, 2.0, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235],
-    "T2 [Nm]": [2.0, 6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843],
-    "K3_i30 [x10^4 Nm/rad]": [None, 0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None],
-    "K2_i30 [x10^4 Nm/rad]": [None, 0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None],
-    "K1_i30 [x10^4 Nm/rad]": [None, 0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None],
-    "K3_i50 [x10^4 Nm/rad]": [0.32, 0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, None],
-    "K2_i50 [x10^4 Nm/rad]": [0.30, 0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, None],
-    "K1_i50 [x10^4 Nm/rad]": [0.22, 0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, None],
-    "K3_i80 [x10^4 Nm/rad]": [0.44, 0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0],
-    "K2_i80 [x10^4 Nm/rad]": [0.34, 0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0],
-    "K1_i80 [x10^4 Nm/rad]": [0.27, 0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0],
+csg_torsional_data = pd.DataFrame({
+        "Size": [14, 17, 20, 25, 32, 40, 45, 50, 58, 65, 80, 90],
+        "T1 [Nm]": [0.2, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235, 430, 618],
+        "T2 [Nm]": [6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843, 1570, 2260],
+        "K3_i30 [x10^4 Nm/rad]": [0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None, None, None],
+        "K2_i30 [x10^4 Nm/rad]": [0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None, None, None],
+        "K1_i30 [x10^4 Nm/rad]": [0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None, None, None],
+        "K3_i50 [x10^4 Nm/rad]": [0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, 78.0, 145, 206],
+        "K2_i50 [x10^4 Nm/rad]": [0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, 61.0, 115, 162],
+        "K1_i50 [x10^4 Nm/rad]": [0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, 44.0, 81.0, 118],
+        "K3_i80 [x10^4 Nm/rad]": [0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0, 185, 263],
+        "K2_i80 [x10^4 Nm/rad]": [0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0, 162, 230],
+        "K1_i80 [x10^4 Nm/rad]": [0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0, 100, 145],
+    })
+
+#SGH and HFUS have the same torsional data
+#CSG and HFUC have the same torsional data
+torsional_data = {
+    "SGH" : shg_torsional_data,
+    "HFUS" : shg_torsional_data,
+    "CSG" : csg_torsional_data,
+    "HFUC" : csg_torsional_data
+}
+resonance_frequency = {
+    "Slowly rotating turntables": 4.0,
+    "Base axes of slow moving welding robots (not laser welding)": 4.0,
+    "Slowly rotating welding turntables": 4.0,
+    "Gantry robot axes": 4.0,
+
+    "Base axes of revolute robots": 8.0,
+    "Hand axes of revolute robots with low requirements regarding dynamic performance": 8.0,
+    "Tool revolvers": 8.0,
+    "Tool magazines": 8.0,
+    "Swivelling and positioning axes in medical and measuring devices": 8.0,
+
+    "Standard applications in general mechanical engineering": 15.0,
+    "Tilting axes": 15.0,
+    "Palette changers": 15.0,
+    "High dynamic tool changers": 15.0,
+    "Revolvers and magazines": 15.0,
+    "Hand axes of revolute robots": 15.0,
+    "Scara robots": 15.0,
+    "Gantry robots": 15.0,
+    "Polishing robots": 15.0,
+    "Dynamic welding turntables": 15.0,
+    "Base axes of welding robots (laser welding)": 15.0,
+    "Swivelling and positioning axes of medical equipment": 15.0,
+
+    "B / C axes in 5 axis grinding machines": 20.0,
+    "Welding robot hand axes (laser welding)": 20.0,
+    "Milling heads for plastics machining": 20.0,
+
+    "C axes in turning machines": 25.0,
+    "Milling heads light metal machining": 25.0,
+    "Milling heads wood machining (chipboards etc.)": 25.0,
+
+    "Milling heads for woodworking (hardwood etc.)": 30.0
 }
 
-# CSG table
-csg_data = {
-    "Size": [14, 17, 20, 25, 32, 40, 45, 50, 58, 65, 80, 90],
-    "T1 [Nm]": [0.2, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235, 430, 618],
-    "T2 [Nm]": [6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843, 1570, 2260],
-    "K3_i30 [x10^4 Nm/rad]": [0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None, None, None],
-    "K2_i30 [x10^4 Nm/rad]": [0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None, None, None],
-    "K1_i30 [x10^4 Nm/rad]": [0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None, None, None],
-    "K3_i50 [x10^4 Nm/rad]": [0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, 78.0, 145, 206],
-    "K2_i50 [x10^4 Nm/rad]": [0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, 61.0, 115, 162],
-    "K1_i50 [x10^4 Nm/rad]": [0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, 44.0, 81.0, 118],
-    "K3_i80 [x10^4 Nm/rad]": [0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0, 185, 263],
-    "K2_i80 [x10^4 Nm/rad]": [0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0, 162, 230],
-    "K1_i80 [x10^4 Nm/rad]": [0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0, 100, 145],
-}
 
 # Create DataFrame
 reducers_df = pd.DataFrame(reducers_data, columns=columns)
@@ -198,7 +240,7 @@ def sci_to_float(s):
 inertia_reducers_CSG = reducers_df[(reducers_df["Series"] == "CSG") | (reducers_df["Series"] == "HFUC")]
 reducers_df.loc[(reducers_df["Series"] == "CSG") | (reducers_df["Series"] == "HFUC"),"Moment of inertia [x10^-4]"] = (inertia_reducers_CSG["Moment of inertia [x10^-4]"].apply(sci_to_float))
 
-
-shg_df = pd.DataFrame(shg_data)
-csg_df = pd.DataFrame(csg_data)
-
+'''# Example usage:
+value = csg_torsional_stiffness_df.loc[csg_torsional_stiffness_df["Size"] == 40, "K1_i80 [x10^4 Nm/rad]"].values[0]
+print(value)
+'''
