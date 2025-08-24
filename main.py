@@ -126,6 +126,7 @@ class HarmonicSelctorApp(QMainWindow):
 def main():
     print("Hello from harmonic-drives-selector!")
     app = QApplication(sys.argv)
+    app.setStyle("Fusion")
     window = HarmonicSelctorApp()
     window.show()
     sys.exit(app.exec_())
