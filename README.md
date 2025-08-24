@@ -13,16 +13,27 @@ git clone https://github.com/AimanHaidair/harmonic-drive-selector.git
 cd harmonic-drive-selector
 ```
 
-2. **sync uv project**
-
+2. **add the requirements of the  project**
+due to uv lock user to install pyqt5-qt5 with pyqt5 windows show issue when use uvlock.
+#####Linux and MacOS
 ```bash
 uv sync
+```
+#####Windows
+```cmd
+# source your enviroment first if you want
+pip install -r requirements-win-txt
 ```
 
 3. **now you have two options to run:**
     - **option 1:** using directly the main.py
+    ##### Linux and MacOs
     ```bash
     uv run main.py
+    ```
+    ##### Windows
+    ```cmd
+    python -m main
     ```
 
     - **option 2:** building the project and get one exeutable file using pyinstaller
@@ -41,7 +52,7 @@ uv sync
 
             ##### Windows:
             ```powershell
-            .venv\Scripts\python.exe -m PyInstaller --onefile --windowed main.py
+            python -m PyInstaller --onefile --windowed main.py
             ```
 
         this will create dist folder contain the executable
