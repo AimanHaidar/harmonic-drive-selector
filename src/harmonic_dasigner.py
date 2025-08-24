@@ -167,18 +167,41 @@ def stiffness_based_dimensioning(application,J):
     
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
+def torsional_angel(load):
+    '''
+    this function determine the tortional angle based on the gear selected and the load applied
+    '''
+    gear_series = load.split("-")[0]
+    gear_size = int(load.split("-")[1])
+    gear_ratio = int(load.split("-")[2])
+    #compute the tortional angle
+    T_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T1 [Nm]"].values[0]
+    T_2 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T2 [Nm]"].values[0]
+    ratio = lambda x: 30 if x <= 30 else (50 if x <= 50 else 80)
+    K_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K1_i"+str(ratio(gear_ratio))+" [x10^4 Nm/rad]"].values[0]*1e4 #Nm/rad
+    K_2 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K2_i"+str(ratio(gear_ratio))+" [x10^4 Nm/rad]"].values[0]*1e4 #Nm/rad
+    K_3 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K3_i"+str(ratio(gear_ratio))+" [x10^4 Nm/rad]"].values[0]*1e4 #Nm/rad
+    
+    if load <= T_1:
+        angle = (load/K_1) #armin
+    elif load <= T_2:
+        angle = (load/K_2)+((T_1/K_1)-(T_1/K_2)) #armin
+    else:
+        angle = (load/K_3)+((T_1/K_1)-(T_1/K_3))+((T_2/K_2)-(T_2/K_3)) #armin   
+    
+    return angle
+
 def output_bearing_dimensioning(gear):
     '''
     this function determine the output bearing based on the gear selected
     '''
-    try:
-        result = reducers_df[(reducers_df["Series"] == gear["Series"]) & (reducers_df["Size"] == gear['Size']) & (reducers_df["Ratio"] == gear['Ratio'])]
-        index = (result.index.values[0])
-    except Exception as e:
-        raise Exception("your gear is not in the table!")
+    gear_series = gear.split("-")[0]
+    gear_size = int(gear.split("-")[1])
+    gear_ratio = int(gear.split("-")[2])
+    #compute the tortional angle
+    T_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T1 [Nm]"].values[0]
+    T_2 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size,"T2 [Nm]"].values[0]
 
-    bearing_type = reducers_df.loc[index,"Output bearing type"]
-    return bearing_type
 
 T = {'dt': [0.3,3,0.4],'T_cycle':[400,320,200],'t_k': 0.15,'T_k':1000,'t_p': 0.2}
 n = {'n_cycle': [7,14,7], 'n_k': 14}
