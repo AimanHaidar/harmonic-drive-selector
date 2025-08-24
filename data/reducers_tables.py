@@ -152,6 +152,40 @@ reducers_data = [
 
 ]
 
+import pandas as pd
+
+# SHG table
+shg_data = {
+    "Size": [11, 14, 17, 20, 25, 32, 40, 45, 50, 58, 65],
+    "T1 [Nm]": [0.8, 2.0, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235],
+    "T2 [Nm]": [2.0, 6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843],
+    "K3_i30 [x10^4 Nm/rad]": [None, 0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None],
+    "K2_i30 [x10^4 Nm/rad]": [None, 0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None],
+    "K1_i30 [x10^4 Nm/rad]": [None, 0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None],
+    "K3_i50 [x10^4 Nm/rad]": [0.32, 0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, None],
+    "K2_i50 [x10^4 Nm/rad]": [0.30, 0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, None],
+    "K1_i50 [x10^4 Nm/rad]": [0.22, 0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, None],
+    "K3_i80 [x10^4 Nm/rad]": [0.44, 0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0],
+    "K2_i80 [x10^4 Nm/rad]": [0.34, 0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0],
+    "K1_i80 [x10^4 Nm/rad]": [0.27, 0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0],
+}
+
+# CSG table
+csg_data = {
+    "Size": [14, 17, 20, 25, 32, 40, 45, 50, 58, 65, 80, 90],
+    "T1 [Nm]": [0.2, 3.9, 7.0, 14, 29, 54, 76, 108, 168, 235, 430, 618],
+    "T2 [Nm]": [6.9, 12, 25, 48, 108, 196, 275, 382, 598, 843, 1570, 2260],
+    "K3_i30 [x10^4 Nm/rad]": [0.34, 0.67, 1.10, 2.10, 4.90, None, None, None, None, None, None, None],
+    "K2_i30 [x10^4 Nm/rad]": [0.24, 0.44, 0.71, 1.30, 3.00, None, None, None, None, None, None, None],
+    "K1_i30 [x10^4 Nm/rad]": [0.19, 0.34, 0.57, 1.00, 2.40, None, None, None, None, None, None, None],
+    "K3_i50 [x10^4 Nm/rad]": [0.57, 1.30, 2.30, 4.40, 9.80, 18.0, 26.0, 34.0, 54.0, 78.0, 145, 206],
+    "K2_i50 [x10^4 Nm/rad]": [0.47, 1.10, 1.80, 3.40, 7.80, 14.0, 20.0, 28.0, 44.0, 61.0, 115, 162],
+    "K1_i50 [x10^4 Nm/rad]": [0.34, 0.81, 1.30, 2.50, 5.40, 10.0, 15.0, 20.0, 31.0, 44.0, 81.0, 118],
+    "K3_i80 [x10^4 Nm/rad]": [0.71, 1.60, 2.90, 5.70, 12.0, 23.0, 33.0, 44.0, 71.0, 98.0, 185, 263],
+    "K2_i80 [x10^4 Nm/rad]": [0.61, 1.40, 2.50, 5.00, 11.0, 20.0, 29.0, 40.0, 61.0, 88.0, 162, 230],
+    "K1_i80 [x10^4 Nm/rad]": [0.47, 1.00, 1.60, 3.10, 6.70, 13.0, 18.0, 25.0, 40.0, 54.0, 100, 145],
+}
+
 # Create DataFrame
 reducers_df = pd.DataFrame(reducers_data, columns=columns)
 
@@ -163,4 +197,8 @@ def sci_to_float(s):
 #edit the inertia data in the reduces table to float for CSG and HFUC
 inertia_reducers_CSG = reducers_df[(reducers_df["Series"] == "CSG") | (reducers_df["Series"] == "HFUC")]
 reducers_df.loc[(reducers_df["Series"] == "CSG") | (reducers_df["Series"] == "HFUC"),"Moment of inertia [x10^-4]"] = (inertia_reducers_CSG["Moment of inertia [x10^-4]"].apply(sci_to_float))
+
+
+shg_df = pd.DataFrame(shg_data)
+csg_df = pd.DataFrame(csg_data)
 
