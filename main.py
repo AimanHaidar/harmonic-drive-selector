@@ -1,7 +1,9 @@
 import sys
+import os
 
 from PyQt5.QtWidgets import QApplication, QMainWindow,QMessageBox
 from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtGui import QFontDatabase, QFont
 from gui.generated.mainwindow import Ui_MainWindow
 from gui.generated.about import Ui_Form
 from gui.dialogs.first_selection_dialog import FirstSelectionDialog
@@ -36,6 +38,28 @@ class HarmonicSelctorApp(QMainWindow):
         self.ui.about_pushButton.clicked.connect(self.show_about)
         self.ui.start_pushButton.clicked.connect(self.start_selection)
         self.ui.exit_pushButton.clicked.connect(self.close)
+        self.apply_app_style()
+
+    def apply_app_style(self):
+        """Apply Fusion style, Ubuntu font, and stylesheet."""
+
+        # Force Fusion style (consistent across platforms)
+        QApplication.setStyle("Fusion")
+
+        # Load Ubuntu font from bundled TTF file
+        regular_path = os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Regular.ttf")
+        bold_path = os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Bold.ttf")
+
+        for font_path in [regular_path, bold_path]:
+            if os.path.exists(font_path):
+                QFontDatabase.addApplicationFont(font_path)
+            else:
+                print(f"⚠️ Font not found: {font_path}")
+
+        # Apply Regular globally
+        QApplication.setFont(QFont("Ubuntu Sans", 10))
+        
+        #TODO: add style sheet to unifiy style for other platforms
 
     def start_selection(self):
         ''' This function is called when the start button is clicked 
@@ -190,6 +214,7 @@ class HarmonicSelctorApp(QMainWindow):
                     "Ratio":int(self.selection3.split("-")[2])
                     }
                 )
+
                 self.show_result(self.selection3,last=True)
 
             
@@ -230,9 +255,21 @@ class HarmonicSelctorApp(QMainWindow):
         drive_specs = reducers_df[(reducers_df["Series"] == selection.split("-")[0]) & (reducers_df["Size"] == int(selection.split("-")[1])) & (reducers_df["Ratio"] == int(selection.split("-")[2]))]
         drive_specs = drive_specs.to_numpy().transpose()
         result_dialog = ResultDialog()
+
+        def show_torque_data():
+            result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
+        def show_force_data():
+            result_dialog.fill_table(result_dialog.tilting_force_data_model,result_dialog.ui.dataTableView,self.tilting_force_data)
+        
         if last:
+            result_dialog.ui.force_button.show()
+            result_dialog.ui.torque_button.show()
+            result_dialog.ui.torque_button.clicked.connect(show_torque_data)
+            result_dialog.ui.force_button.clicked.connect(show_force_data)
             result_dialog.ui.label_3.hide()
-        result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.torque_data)
+        else:
+            result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
+        
         result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
         result_dialog.ui.selection.setText((selection))
         if selection.split("-")[0] in ["HFUC","CSG"]:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/result_dialog.ui'
+# Form implementation generated from reading ui file 'gui/ui/result_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -16,10 +16,10 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(794, 468)
         self.dataTableView = QtWidgets.QTableView(Dialog)
-        self.dataTableView.setGeometry(QtCore.QRect(40, 220, 256, 192))
+        self.dataTableView.setGeometry(QtCore.QRect(30, 230, 256, 192))
         self.dataTableView.setObjectName("dataTableView")
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(40, 180, 256, 31))
+        self.textBrowser.setGeometry(QtCore.QRect(30, 180, 161, 31))
         self.textBrowser.setObjectName("textBrowser")
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(20, 10, 121, 21))
@@ -43,7 +43,7 @@ class Ui_Dialog(object):
         self.selection.setText("")
         self.selection.setObjectName("selection")
         self.driveTableView = QtWidgets.QTableView(Dialog)
-        self.driveTableView.setGeometry(QtCore.QRect(330, 41, 451, 371))
+        self.driveTableView.setGeometry(QtCore.QRect(330, 50, 451, 371))
         self.driveTableView.setObjectName("driveTableView")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(330, 0, 231, 41))
@@ -62,6 +62,12 @@ class Ui_Dialog(object):
         self.label_3.setFont(font)
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
+        self.torque_button = QtWidgets.QRadioButton(Dialog)
+        self.torque_button.setGeometry(QtCore.QRect(210, 164, 111, 41))
+        self.torque_button.setObjectName("torque_button")
+        self.force_button = QtWidgets.QRadioButton(Dialog)
+        self.force_button.setGeometry(QtCore.QRect(210, 200, 111, 31))
+        self.force_button.setObjectName("force_button")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -78,4 +84,16 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "your drive is :"))
         self.label_2.setText(_translate("Dialog", "drive specifications:"))
         self.label_3.setText(_translate("Dialog", "Continue With Stiffness Base Dimensioning:"))
+        self.torque_button.setText(_translate("Dialog", "Torqe"))
+        self.force_button.setText(_translate("Dialog", "Force"))
 from ..resources import pic_rc
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())

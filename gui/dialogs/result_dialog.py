@@ -17,22 +17,31 @@ class ResultDialog(QtWidgets.QDialog):
             "Limit for average input speed [rpm]", "Moment of inertia [x10^-4]",
             "Weight (standard version,light version) [kg]",
         ]
-        self.data_model = QStandardItemModel(5, 3)
+        self.torque_data_model = QStandardItemModel(5, 3)
+        self.tilting_force_data_model = QStandardItemModel(4, 6)
         self.specs_model = QStandardItemModel(len(columns),1)
 
-        # Set headers (optional)
-        self.data_model.setHorizontalHeaderLabels(["torque (N.m)", "Angular Speed (rpm)", "Timestamps(sec)"])
-        self.data_model.setVerticalHeaderLabels(["1", "2", "3", "overload", "Dwell"])
+        # Set headers for torque data
+        self.torque_data_model.setHorizontalHeaderLabels(["torque (N.m)", "Angular Speed (rpm)", "Timestamps(sec)"])
+        self.torque_data_model.setVerticalHeaderLabels(["1", "2", "3", "overload", "Dwell"])
+
+        # Set headers for tilting force data
+        self.tilting_force_data_model.setHorizontalHeaderLabels(["Fr (N)", "Lr (m)", "Fa (N)", "La (m)", "n (rpm)", "dt (s)"])
+        self.tilting_force_data_model.setVerticalHeaderLabels(["1", "2", "3", "max"])
 
         self.specs_model.setHorizontalHeaderLabels(["Specifications"])
         self.specs_model.setVerticalHeaderLabels(columns)
         # Attach model to your QTableView
-        self.ui.dataTableView.setModel(self.data_model)
+        self.ui.dataTableView.setModel(self.torque_data_model)
         self.ui.driveTableView.setModel(self.specs_model)
 
         #connect boxButton of continue dimensioning to accept
         self.ui.continue_box_button.accepted.connect(self.accept)
         self.ui.continue_box_button.rejected.connect(self.reject)
+
+        self.ui.force_button.hide()
+        self.ui.torque_button.hide()
+
 
     def fill_table(self, model, table, data):
         ''' Fill a QTableView with data 
@@ -43,8 +52,6 @@ class ResultDialog(QtWidgets.QDialog):
         '''
         rows = model.rowCount()
         cols = model.columnCount()
-        print("hell:",rows,cols)
-        print(data)
         for row in range(rows):
             for col in range(cols):
                 model.setItem(row, col, QStandardItem(str(data[row][col])))

@@ -8,6 +8,7 @@ class BearingFactorsDialog(QtWidgets.QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
         self.ui.load_condition.currentTextChanged.connect(self.appropriate_factors)
+        self.minimum_static_safety_factor = 1.5
         self.ui.operating_cond_bearing.currentTextChanged.connect(self.appropriate_factors)
         self.ui.buttonBox.accepted.disconnect()
         self.ui.buttonBox.accepted.connect(self.check_input)
@@ -24,7 +25,7 @@ class BearingFactorsDialog(QtWidgets.QDialog):
             self.ui.operating_factor_range.setText("operating factor: 1.5 - 3.0")
 
         bearing_operating_condition = self.ui.operating_cond_bearing.currentText()
-        print(bearing_operating_condition)
+        print(bearing_operating_condition=="Normal operating conditions")
         if bearing_operating_condition == "Normal operating conditions":
             self.minimum_static_safety_factor = 1.5
         elif bearing_operating_condition == "In case vibrations or impacts":

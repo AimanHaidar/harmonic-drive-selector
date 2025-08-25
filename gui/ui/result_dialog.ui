@@ -16,8 +16,8 @@
   <widget class="QTableView" name="dataTableView">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>220</y>
+     <x>30</x>
+     <y>230</y>
      <width>256</width>
      <height>192</height>
     </rect>
@@ -26,9 +26,9 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>180</y>
-     <width>256</width>
+     <width>161</width>
      <height>31</height>
     </rect>
    </property>
@@ -102,7 +102,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>41</y>
+     <y>50</y>
      <width>451</width>
      <height>371</height>
     </rect>
@@ -158,6 +158,32 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="torque_button">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>164</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Torqe</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="force_button">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>200</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Force</string>
    </property>
   </widget>
  </widget>
