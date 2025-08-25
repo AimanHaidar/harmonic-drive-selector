@@ -249,7 +249,7 @@ def torsional_angel(gear,load):
     
     return angle
 
-def output_bearing_dimensioning(preselection,F_tilting,L_r,L_a,R,operating_factor,static_factor,L_10_req):
+def output_bearing_dimensioning(preselection,F_tilting,operating_factor,static_factor,L_10_req):
     '''
     this function determine the validity of output bearing based on the gear selected
 
@@ -282,15 +282,18 @@ def output_bearing_dimensioning(preselection,F_tilting,L_r,L_a,R,operating_facto
 
         Fr_max = F_tilting['Fr_max'] #N
         Fa_max = F_tilting['Fa_max'] #N
-        M_max = Fr_max*(L_r+R) + Fa_max*L_a #Nm
+        Lr_max = F_tilting['Lr_max']
+        La_max = F_tilting['La_max']
+        R = F_tilting['R']
+        M_max = Fr_max * (Lr_max + R) + Fa_max * La_max #Nm
         B = 10.0/3.0 #only for crossed roller bearing
-        # calculat the average torque like ( ((|n1|*t1*(|F1|^(B)+...+|nn|*tn*|(Fn)|^(B)))^(1/B)) /((|)n1|*t1+...+|nn|*tn)^(1/B)) )
-        Fr_av, n_av = average(F_tilting,"Fr_cycle","n_cycle",B) #N
-        Fa_av, _ = average(F_tilting,"Fa_cycle","n_cycle",B) #N
+        # Calculate the average torque like ( ((|n1|*t1*(|F1|^(B)+...+|nn|*tn*|(Fn)|^(B)))^(1/B)) /((|)n1|*t1+...+|nn|*tn)^(1/B)) )
+        Fr_av, n_av = average(F_tilting, "Fr_cycle", "n_cycle", B) #N
+        Fa_av, _ = average(F_tilting, "Fa_cycle", "n_cycle", B) #N
         # Calculate the average tilting moment on the bearing from Fr and Fa
         M_tilting_data = {
             'dt': F_tilting['dt'],
-            'M_cycle': [Fr * (L_r + R) + Fa * L_a for Fr, Fa in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'])],
+            'M_cycle': [Fr * (Lr + R) + Fa * La for Fr, Fa, Lr, La in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'], F_tilting['Lr_cycle'], F_tilting['La_cycle'])],
             'n_cycle': F_tilting['n_cycle'],
             't_p': F_tilting['t_p']
         }
@@ -361,14 +364,17 @@ F_tilting = {
     'dt': [0.3, 3, 0.4],
     'Fr_cycle': [1000, 3000, 2000],
     'Fa_cycle': [2000, 1000, 500],
+    'Lr_cycle': [0.2, 0.2, 0.2],  # Example: same L_r for all cycles
+    'La_cycle': [1.5, 1.5, 1.5],  # Example: same L_a for all cycles
+    'R': 0.04,
     'Fr_max': 800,
     'Fa_max': 300,
+    'Lr_max': 0.2,
+    'La_max': 1.5,
     'n_cycle': [7, 14, 7],
     't_p': 0.2
 }
-L_r = 0.2
-L_a = 1.5
-R = 0.04
-a = [Fr* (L_r + R) + Fa * L_a for Fr, Fa in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'])]
+# Calculate tilting moment for each cycle
+a = [Fr * (Lr + F_tilting['R']) + Fa * La for Fr, Fa, Lr, La in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'], F_tilting['Lr_cycle'], F_tilting['La_cycle'])]
 print(a)
-print(output_bearing_dimensioning(s2,F_tilting,L_r,L_a,R,1.2,1.5,L_req))
+print(output_bearing_dimensioning(s2,F_tilting,1.2,1.5,L_req))
