@@ -29,7 +29,7 @@ sys.path.append(str(Path(__file__).resolve().parent)+"/gui")
 
 def apply_global_style(app: QApplication):
     """Force Fusion, Ubuntu Sans font, and stylesheet for ALL windows/dialogs."""
-    app.setStyle("Fustion")
+    app.setStyle("Fusion")
 
     # Load Ubuntu Sans fonts
     base_dir = os.path.dirname(__file__)
