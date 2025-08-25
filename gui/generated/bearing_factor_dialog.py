@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/bearing_factor_dialog.ui'
+# Form implementation generated from reading ui file 'gui/ui/bearing_factor_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -63,7 +63,17 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Load Condition:"))
         self.label_2.setText(_translate("Dialog", "Operating of Bearing:"))
         self.operating_cond_bearing.setItemText(0, _translate("Dialog", "Normal operating conditions"))
-        self.operating_cond_bearing.setItemText(1, _translate("Dialog", "In case vibrations or impact"))
+        self.operating_cond_bearing.setItemText(1, _translate("Dialog", "In case vibrations or impacts"))
         self.operating_cond_bearing.setItemText(2, _translate("Dialog", "For the highest demands on transmission accuracy"))
         self.label_3.setText(_translate("Dialog", "operating factor:"))
         self.operating_factor_range.setText(_translate("Dialog", "input number between 1-1.2"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())

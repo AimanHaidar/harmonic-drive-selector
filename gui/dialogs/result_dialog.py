@@ -1,13 +1,14 @@
 from PyQt5 import QtWidgets
 from gui.generated.result_dialog import Ui_Dialog
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-
+from PyQt5.QtCore import QTimer
 
 class ResultDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+        QTimer.singleShot(0, self.center_on_screen)
         # Create a model with 3 rows, 2 columns
         columns = [
             "Series", "Size", "Ratio", "Limit for repeated peak torque [Nm]",
@@ -50,3 +51,9 @@ class ResultDialog(QtWidgets.QDialog):
 
         table.setModel(model)
 
+    def center_on_screen(self):
+            frame_geometry = self.frameGeometry()
+            screen = QtWidgets.QApplication.primaryScreen()
+            center_point = screen.availableGeometry().center()
+            frame_geometry.moveCenter(center_point)
+            self.move(frame_geometry.topLeft())

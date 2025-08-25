@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication
 from gui.generated.selection_input_dialog import Ui_Dialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 from data.reducers_tables import reducers_df
+from PyQt5.QtCore import QTimer
 import re
 
 pattern = re.compile(r'^(CSG|SHG)-\d+-\d+-2UH$')
@@ -10,9 +12,18 @@ class SelectionInputDialog(QtWidgets.QDialog):
         super().__init__(parent)
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+        QTimer.singleShot(0, self.center_on_screen)
         self.ui.buttonBox.accepted.disconnect()
         self.ui.buttonBox.accepted.connect(self.check_input)
         self.ui.buttonBox.rejected.connect(self.reject)
+          # runs after show()
+
+    def center_on_screen(self):
+        frame_geometry = self.frameGeometry()
+        screen = QtWidgets.QApplication.primaryScreen()
+        center_point = screen.availableGeometry().center()
+        frame_geometry.moveCenter(center_point)
+        self.move(frame_geometry.topLeft())
 
     def check_input(self):
         input = self.ui.lineEdit.text()
