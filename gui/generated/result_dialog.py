@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(794, 448)
+        Dialog.resize(794, 468)
         self.dataTableView = QtWidgets.QTableView(Dialog)
         self.dataTableView.setGeometry(QtCore.QRect(40, 220, 256, 192))
         self.dataTableView.setObjectName("dataTableView")
@@ -51,6 +51,17 @@ class Ui_Dialog(object):
         font.setPointSize(12)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        self.continue_box_button = QtWidgets.QDialogButtonBox(Dialog)
+        self.continue_box_button.setGeometry(QtCore.QRect(610, 430, 166, 31))
+        self.continue_box_button.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.continue_box_button.setObjectName("continue_box_button")
+        self.label_3 = QtWidgets.QLabel(Dialog)
+        self.label_3.setGeometry(QtCore.QRect(10, 438, 541, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_3.setFont(font)
+        self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_3.setObjectName("label_3")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -66,4 +77,5 @@ class Ui_Dialog(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.label.setText(_translate("Dialog", "your drive is :"))
         self.label_2.setText(_translate("Dialog", "drive specifications:"))
+        self.label_3.setText(_translate("Dialog", "Continue With Stiffness Base Dimensioning:"))
 from ..resources import pic_rc

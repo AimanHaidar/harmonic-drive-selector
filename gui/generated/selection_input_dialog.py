@@ -24,7 +24,7 @@ class Ui_Dialog(object):
         self.lineEdit.setGeometry(QtCore.QRect(140, 66, 151, 31))
         self.lineEdit.setObjectName("lineEdit")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(50, 70, 81, 19))
+        self.label_2.setGeometry(QtCore.QRect(50, 70, 91, 20))
         self.label_2.setObjectName("label_2")
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser.setGeometry(QtCore.QRect(20, 10, 381, 51))

@@ -29,6 +29,10 @@ class ResultDialog(QtWidgets.QDialog):
         self.ui.dataTableView.setModel(self.data_model)
         self.ui.driveTableView.setModel(self.specs_model)
 
+        #connect boxButton of continue dimensioning to accept
+        self.ui.continue_box_button.accepted.connect(self.accept)
+        self.ui.continue_box_button.rejected.connect(self.reject)
+
     def fill_table(self, model, table, data):
         ''' Fill a QTableView with data 
         
