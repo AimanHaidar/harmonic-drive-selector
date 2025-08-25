@@ -27,6 +27,23 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent)+"/src")
 sys.path.append(str(Path(__file__).resolve().parent)+"/gui")
 
+def apply_global_style(app: QApplication):
+    """Force Fusion, Ubuntu Sans font, and stylesheet for ALL windows/dialogs."""
+    app.setStyle("Fustion")
+
+    # Load Ubuntu Sans fonts
+    base_dir = os.path.dirname(__file__)
+    fonts = [
+        os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Regular.ttf"),
+        os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Bold.ttf")
+    ]
+    for f in fonts:
+        if os.path.exists(f):
+            QFontDatabase.addApplicationFont(f)
+
+    # Apply global font
+    app.setFont(QFont("Ubuntu Sans", 10))
+
 class HarmonicSelctorApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -38,26 +55,6 @@ class HarmonicSelctorApp(QMainWindow):
         self.ui.about_pushButton.clicked.connect(self.show_about)
         self.ui.start_pushButton.clicked.connect(self.start_selection)
         self.ui.exit_pushButton.clicked.connect(self.close)
-        self.apply_app_style()
-
-    def apply_app_style(self):
-        """Apply Fusion style, Ubuntu font, and stylesheet."""
-
-        # Force Fusion style (consistent across platforms)
-        QApplication.setStyle("Fusion")
-
-        # Load Ubuntu font from bundled TTF file
-        regular_path = os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Regular.ttf")
-        bold_path = os.path.join(os.path.dirname(__file__), "gui/resources/fonts", "UbuntuSans-Bold.ttf")
-
-        for font_path in [regular_path, bold_path]:
-            if os.path.exists(font_path):
-                QFontDatabase.addApplicationFont(font_path)
-            else:
-                print(f"⚠️ Font not found: {font_path}")
-
-        # Apply Regular globally
-        QApplication.setFont(QFont("Ubuntu Sans", 10))
         
         #TODO: add style sheet to unifiy style for other platforms
 
@@ -288,7 +285,7 @@ def show_exception_box(exc_type, exc_value, exc_traceback):
 def main():
     print("Hello from harmonic-drives-selector!")
     app = QApplication(sys.argv)
-    app.setStyle("Fusion")
+    apply_global_style(app)
     window = HarmonicSelctorApp()
     window.show()
     sys.exit(app.exec_())
