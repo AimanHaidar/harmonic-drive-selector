@@ -2,7 +2,13 @@
 This is a Harmonic Drive app built with Qt5 that allows engineers to easily select the appropriate drive for their application by inputting torque and angular speed data for their load.
 
 ## Screenshots
+#### Main Window:
+
 ![Description of image](screenshots/main_window.png)
+
+#### Results:
+
+![Description of image](screenshots/results.png)
 
 ## Installation
 
