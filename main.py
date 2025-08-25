@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow,QMessageBox
 from PyQt5 import QtWidgets, QtGui
 from gui.generated.mainwindow import Ui_MainWindow
 from gui.generated.about import Ui_Form
@@ -13,6 +13,7 @@ from gui.dialogs.input_lifetime_dialog import InputLifetimeDialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 from gui.dialogs.result_dialog import ResultDialog
 from gui.dialogs.drive_application_dialog import DriveApplicationDialog
+from gui.dialogs.bearing_factors_dialog import BearingFactorsDialog
 
 from src.harmonic_dasigner import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning
 from data.reducers_tables import reducers_df
@@ -86,19 +87,19 @@ class HarmonicSelctorApp(QMainWindow):
             if selection_input_dialog.Rejected == state:
                 return
         # get the data from the data dialog
-        self.data = self.input_data()
+        self.torque_data = self.input_data("torque")
         #close selection process if no data is input is cancelled
-        if not self.data:
+        if not self.torque_data:
             return
         # Combine T and n into one load_data dictionary
         self.load_data = {
-            'T_cycle': [self.data[0][0], self.data[1][0], self.data[2][0]],
-            'T_k': self.data[3][0],
-            't_k': self.data[3][2],
-            't_p': self.data[4][2],
-            'dt': [self.data[0][2], self.data[1][2], self.data[2][2]],
-            'n_cycle': [self.data[0][1], self.data[1][1], self.data[2][1]],
-            'n_k': self.data[3][1]
+            'T_cycle': [self.torque_data[0][0], self.torque_data[1][0], self.torque_data[2][0]],
+            'T_k': self.torque_data[3][0],
+            't_k': self.torque_data[3][2],
+            't_p': self.torque_data[4][2],
+            'dt': [self.torque_data[0][2], self.torque_data[1][2], self.torque_data[2][2]],
+            'n_cycle': [self.torque_data[0][1], self.torque_data[1][1], self.torque_data[2][1]],
+            'n_k': self.torque_data[3][1]
         }
 
         #dialog to input the required lifetime of the harmonic drive
@@ -156,7 +157,30 @@ class HarmonicSelctorApp(QMainWindow):
 
             if self.continue_dimensioning:
                 #TODO add bearing factors dialog here and edit the data dialog to input F_tilting
-                '''self.selection3 = output_bearing_dimensioning(self.selection2)
+                self.tilting_force_data = self.input_data("tilting_force")
+                if not self.tilting_force_data:
+                    return
+                # Combine tilting force data into one dictionary
+                self.tilting_data = {
+                    'Fr_cycle': [self.tilting_force_data[0][0], self.tilting_force_data[1][0], self.tilting_force_data[2][0]],
+                    'Lr_cycle': [self.tilting_force_data[0][1], self.tilting_force_data[1][1], self.tilting_force_data[2][1]],
+                    'Fa_cycle': [self.tilting_force_data[0][2], self.tilting_force_data[1][2], self.tilting_force_data[2][2]],
+                    'La_cycle': [self.tilting_force_data[0][3], self.tilting_force_data[1][3], self.tilting_force_data[2][3]],
+                    'dt': [self.tilting_force_data[0][5], self.tilting_force_data[1][5], self.tilting_force_data[2][5]],
+                    'R': self.tilting_force_data[3][1],
+                    'Fr_max': self.tilting_force_data[3][0],
+                    'Lr_max': self.tilting_force_data[3][1],
+                    'Fa_max': self.tilting_force_data[3][2],
+                    'La_max': self.tilting_force_data[3][3],
+                    'n_cycle': [self.tilting_force_data[0][4], self.tilting_force_data[1][4], self.tilting_force_data[2][4]],
+                    't_p': self.tilting_force_data[3][2]
+                }
+                print(self.tilting_data)
+                bearing_factors_dialog = BearingFactorsDialog()
+                state = bearing_factors_dialog.exec_()
+                if state == bearing_factors_dialog.Rejected:
+                    return
+                self.selection3 = output_bearing_dimensioning(self.selection2,self.tilting_data,bearing_factors_dialog.operating_factor,bearing_factors_dialog.minimum_static_safety_factor,20000)
                 self.selection3 = torque_based_dimensioning(self.selection3.split("-")[0],
                     self.load_data,
                     self.lifetime,
@@ -165,9 +189,8 @@ class HarmonicSelctorApp(QMainWindow):
                     "Size":int(self.selection3.split("-")[1]),
                     "Ratio":int(self.selection3.split("-")[2])
                     }
-                    )
-                self.show_result(self.selection3)
-                '''
+                )
+                self.show_result(self.selection3,last=True)
 
             
 
@@ -181,13 +204,15 @@ class HarmonicSelctorApp(QMainWindow):
         self.about.setupUi(self.Form)
         self.Form.show()
     
-    def input_data(self):
+    def input_data(self,data_type="torque"):
         '''This function opens the data input dialog and returns the data as a list of lists
-        
+        Parameters:
+            data_type: str, type of data to input, can be "torque" or "tilting force"
+
         Returns:
             list of data or False if dialog is cancelled
         '''
-        data_dialog = DataDialog()
+        data_dialog = DataDialog(data_type)
         state = data_dialog.exec_()
         if state == data_dialog.Accepted:
             return data_dialog.float_data
@@ -199,12 +224,15 @@ class HarmonicSelctorApp(QMainWindow):
         type_inform_dialog.ui.harmonic_type.setText(type)
         self.informed = type_inform_dialog.exec_()
 
-    def show_result(self,selection):
+    def show_result(self,selection,last=False):
+        
         print(selection)
         drive_specs = reducers_df[(reducers_df["Series"] == selection.split("-")[0]) & (reducers_df["Size"] == int(selection.split("-")[1])) & (reducers_df["Ratio"] == int(selection.split("-")[2]))]
         drive_specs = drive_specs.to_numpy().transpose()
         result_dialog = ResultDialog()
-        result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.data)
+        if last:
+            result_dialog.ui.label_3.hide()
+        result_dialog.fill_table(result_dialog.data_model,result_dialog.ui.dataTableView,self.torque_data)
         result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
         result_dialog.ui.selection.setText((selection))
         if selection.split("-")[0] in ["HFUC","CSG"]:
@@ -212,6 +240,13 @@ class HarmonicSelctorApp(QMainWindow):
         else:
             result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/SHG_photo.png"))
         self.continue_dimensioning = (result_dialog.exec_() == result_dialog.Accepted)
+
+def show_exception_box(exc_type, exc_value, exc_traceback):
+    """Show only the exception message in a QMessageBox (no details)."""
+    QMessageBox.critical(None, "Error", str(exc_value))
+
+# Install handler
+#sys.excepthook = show_exception_box
 
 def main():
     print("Hello from harmonic-drives-selector!")
