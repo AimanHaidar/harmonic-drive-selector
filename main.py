@@ -280,7 +280,7 @@ def show_exception_box(exc_type, exc_value, exc_traceback):
     QMessageBox.critical(None, "Error", str(exc_value))
 
 # Install handler
-#sys.excepthook = show_exception_box
+sys.excepthook = show_exception_box
 
 def main():
     print("Hello from harmonic-drives-selector!")
