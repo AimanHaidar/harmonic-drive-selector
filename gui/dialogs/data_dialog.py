@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from gui.generated.data_dialog import Ui_Dialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 from PyQt5.QtWidgets import QTableWidgetItem
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, Qt
 
 class DataDialog(QtWidgets.QDialog):
     def __init__(self,data_type, parent=None):
@@ -24,6 +24,7 @@ class DataDialog(QtWidgets.QDialog):
             self.ui.dataTable.setItem(1, 0, QTableWidgetItem("320"))
             self.ui.dataTable.setItem(2, 0, QTableWidgetItem("200"))
             self.ui.dataTable.setItem(3, 0, QTableWidgetItem("1000"))
+            self.ui.dataTable.setItem(4, 0, QTableWidgetItem("0"))
 
             # Second column dt
             self.ui.dataTable.setItem(0, 2, QTableWidgetItem("0.3"))
@@ -37,6 +38,19 @@ class DataDialog(QtWidgets.QDialog):
             self.ui.dataTable.setItem(1, 1, QTableWidgetItem("14"))
             self.ui.dataTable.setItem(2, 1, QTableWidgetItem("7"))
             self.ui.dataTable.setItem(3, 1, QTableWidgetItem("14"))
+            self.ui.dataTable.setItem(4, 1, QTableWidgetItem("0"))
+
+            #Lock not needed cells
+            item = self.ui.dataTable.item(self.ui.dataTable.rowCount()-1, 0)
+            if item:
+                item.setFlags(Qt.NoItemFlags)   # not selectable, not editable
+                item.setText("Not Needed")
+            
+            item = self.ui.dataTable.item(self.ui.dataTable.rowCount()-1, 1)
+            if item:
+                item.setFlags(Qt.NoItemFlags)   # not selectable, not editable
+                item.setText("Not Needed")
+
         elif data_type == "tilting_force":
             # Set horizontal header labels for tilting force, including Fa
             tilting_horizontal_labels = ["Fr (N)","Lr (m)", "Fa (N)","La (m)", "n (rpm)", "dt (s)"]
@@ -76,6 +90,8 @@ class DataDialog(QtWidgets.QDialog):
             self.ui.dataTable.setItem(2, 5, QTableWidgetItem("0.4"))
             self.ui.dataTable.setItem(3, 5, QTableWidgetItem("0.15"))
 
+            
+
 
     def show_table(self):
         self.ui.dataTable.show()
@@ -99,12 +115,12 @@ class DataDialog(QtWidgets.QDialog):
             for col in range(self.ui.dataTable.columnCount()):
                 for row in range(self.ui.dataTable.rowCount()):
                     #skip last row first two columns for lifetime and pause time
-                    if row==self.ui.dataTable.rowCount()-1 and col == 0:
-                        continue
-                    if row==self.ui.dataTable.rowCount()-1 and col == 1:
-                        continue
-
                     item = self.ui.dataTable.item(row, col)
+                    flags = item.flags()
+                    #skip un editable flags
+                    if not (flags & Qt.ItemIsSelectable) and not (flags & Qt.ItemIsEditable):
+                        continue
+                    
                     if item is None or item.text() == "":
                         print(f"Empty cell at ({row+1},{col+1})")
                         non_numbers_dialog = NonNumbersDialog()
