@@ -38,6 +38,21 @@
      <height>31</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>No impact loads or vibrations</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Normal loads</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Impact loads or vibrations</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -74,6 +89,21 @@
      <height>31</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>Normal operating conditions</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>In case vibrations or impact</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>For the highest demands on transmission accuracy</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLineEdit" name="operating_factor">
    <property name="geometry">

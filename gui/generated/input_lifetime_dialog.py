@@ -21,10 +21,10 @@ class Ui_Dialog(object):
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(170, 16, 113, 31))
+        self.lineEdit.setGeometry(QtCore.QRect(212, 20, 71, 31))
         self.lineEdit.setObjectName("lineEdit")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(40, 20, 131, 19))
+        self.label.setGeometry(QtCore.QRect(30, 18, 181, 31))
         self.label.setObjectName("label")
 
         self.retranslateUi(Dialog)

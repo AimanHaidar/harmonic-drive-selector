@@ -136,7 +136,7 @@ class HarmonicSelctorApp(QMainWindow):
                 return
             application_type = drive_application_dialog.ui.application_type.currentText()
             load_moment_of_inertia_dialog = InputLifetimeDialog()
-            load_moment_of_inertia_dialog.ui.label.setText("your load moment of inertia")
+            load_moment_of_inertia_dialog.ui.label.setText("your load moment of inertia:")
             state = load_moment_of_inertia_dialog.exec_()
             if state == load_moment_of_inertia_dialog.Rejected:
                 return
@@ -144,17 +144,31 @@ class HarmonicSelctorApp(QMainWindow):
 
             self.selection2 = stiffness_based_dimensioning(self.selection1,application_type,load_moment_of_inertia)
             self.selection2 = torque_based_dimensioning(self.selection2.split("-")[0],
-                                                        self.load_data,
-                                                        self.lifetime,
-                                                        {
-                                                         "Series":self.selection2.split("-")[0],
-                                                         "Size":int(self.selection2.split("-")[1]),
-                                                         "Ratio":int(self.selection2.split("-")[2])
-                                                         }
-                                                         )
+                self.load_data,
+                self.lifetime,
+                first_selection = {
+                "Series":self.selection2.split("-")[0],
+                "Size":int(self.selection2.split("-")[1]),
+                "Ratio":int(self.selection2.split("-")[2])
+                }
+                )
             self.show_result(self.selection2)
 
-            
+            if self.continue_dimensioning:
+                #TODO add bearing factors dialog here and edit the data dialog to input F_tilting
+                '''self.selection3 = output_bearing_dimensioning(self.selection2)
+                self.selection3 = torque_based_dimensioning(self.selection3.split("-")[0],
+                    self.load_data,
+                    self.lifetime,
+                    first_selection = {
+                    "Series":self.selection3.split("-")[0],
+                    "Size":int(self.selection3.split("-")[1]),
+                    "Ratio":int(self.selection3.split("-")[2])
+                    }
+                    )
+                self.show_result(self.selection3)
+                '''
+
             
 
 
