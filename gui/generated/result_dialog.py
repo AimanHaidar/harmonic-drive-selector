@@ -83,7 +83,7 @@ class Ui_Dialog(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.label.setText(_translate("Dialog", "your drive is :"))
         self.label_2.setText(_translate("Dialog", "drive specifications:"))
-        self.label_3.setText(_translate("Dialog", "Continue With Stiffness Base Dimensioning:"))
+        self.label_3.setText(_translate("Dialog", "Continue With Stiffness Based Dimensioning?"))
         self.torque_button.setText(_translate("Dialog", "Torqe"))
         self.force_button.setText(_translate("Dialog", "Force"))
 from ..resources import pic_rc

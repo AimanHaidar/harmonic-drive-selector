@@ -154,7 +154,7 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="text">
-    <string>Continue With Stiffness Base Dimensioning:</string>
+    <string>Continue With Stiffness Based Dimensioning?</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

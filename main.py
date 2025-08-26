@@ -174,7 +174,7 @@ class HarmonicSelctorApp(QMainWindow):
                 "Ratio":int(self.selection2.split("-")[2])
                 }
                 )
-            self.show_result(self.selection2)
+            self.show_result(self.selection2,step=1)
 
             if self.continue_dimensioning:
                 #TODO add bearing factors dialog here and edit the data dialog to input F_tilting
@@ -212,7 +212,7 @@ class HarmonicSelctorApp(QMainWindow):
                     }
                 )
 
-                self.show_result(self.selection3,last=True)
+                self.show_result(self.selection3,step=2)
 
             
 
@@ -246,7 +246,7 @@ class HarmonicSelctorApp(QMainWindow):
         type_inform_dialog.ui.harmonic_type.setText(type)
         self.informed = type_inform_dialog.exec_()
 
-    def show_result(self,selection,last=False):
+    def show_result(self,selection,step=0):
         
         print(selection)
         drive_specs = reducers_df[(reducers_df["Series"] == selection.split("-")[0]) & (reducers_df["Size"] == int(selection.split("-")[1])) & (reducers_df["Ratio"] == int(selection.split("-")[2]))]
@@ -258,15 +258,18 @@ class HarmonicSelctorApp(QMainWindow):
         def show_force_data():
             result_dialog.fill_table(result_dialog.tilting_force_data_model,result_dialog.ui.dataTableView,self.tilting_force_data)
         
-        if last:
+        if step == 2:
             result_dialog.ui.force_button.show()
             result_dialog.ui.torque_button.show()
             result_dialog.ui.torque_button.clicked.connect(show_torque_data)
             result_dialog.ui.force_button.clicked.connect(show_force_data)
             result_dialog.ui.label_3.hide()
+        elif step ==1:
+            result_dialog.ui.label_3.setText("Continue With Output Bearing Dimensioning?")
+            result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
         else:
             result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
-        
+
         result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
         result_dialog.ui.selection.setText((selection))
         if selection.split("-")[0] in ["HFUC","CSG"]:
