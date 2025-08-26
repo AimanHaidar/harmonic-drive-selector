@@ -66,4 +66,4 @@ class Ui_Dialog(object):
         self.operating_cond_bearing.setItemText(1, _translate("Dialog", "In case vibrations or impacts"))
         self.operating_cond_bearing.setItemText(2, _translate("Dialog", "For the highest demands on transmission accuracy"))
         self.label_3.setText(_translate("Dialog", "operating factor:"))
-        self.operating_factor_range.setText(_translate("Dialog", "input number between 1-1.2"))
+        self.operating_factor_range.setText(_translate("Dialog", "recommended operating factor: 1.0 - 1.2"))

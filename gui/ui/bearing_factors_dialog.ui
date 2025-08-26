@@ -138,7 +138,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>input number between 1-1.2</string>
+    <string>recommended operating factor: 1.0 - 1.2</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
