@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets
 from gui.generated.data_dialog import Ui_Dialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
+from gui.dialogs.force_info_dialog import ForceInfoDialog
+from gui.dialogs.torque_info_dialog import TorqueInfoDialog
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtCore import QTimer, Qt
 
@@ -17,6 +19,8 @@ class DataDialog(QtWidgets.QDialog):
         self.ui.json_s.clicked.connect(self.show_file_path)
         self.ui.buttonBox.accepted.disconnect()
         self.ui.buttonBox.accepted.connect(self.insert_data)
+        self.data_type = data_type
+        self.ui.info_button.clicked.connect(self.show_info)
         # Fill table with example data
         if data_type == "torque":
             # First column T
@@ -147,6 +151,14 @@ class DataDialog(QtWidgets.QDialog):
             non_numbers_dialog.exec_()
             return
         
+    def show_info(self):
+        if self.data_type=="torque":
+            torque_info_dialog = TorqueInfoDialog()
+            torque_info_dialog.exec_()
+        elif self.data_type=="tilting_force":
+            force_info_dialog = ForceInfoDialog()
+            force_info_dialog.exec_()
+
     def center_on_screen(self):
         frame_geometry = self.frameGeometry()
         screen = QtWidgets.QApplication.primaryScreen()
