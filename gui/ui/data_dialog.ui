@@ -110,17 +110,17 @@
    </row>
    <column>
     <property name="text">
-     <string>torque</string>
+     <string>T (Nm)</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Angular Speed</string>
+     <string>n (rpm)</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Timestapm</string>
+     <string>Timestamp (s)</string>
     </property>
    </column>
   </widget>
