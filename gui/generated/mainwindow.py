@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDesktopWidget
 
 
 class Ui_MainWindow(object):
@@ -80,7 +79,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.center_on_screen(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -91,11 +89,4 @@ class Ui_MainWindow(object):
         self.start_pushButton.setText(_translate("MainWindow", "Start"))
         self.exit_pushButton.setText(_translate("MainWindow", "Exit"))
         self.about_pushButton.setText(_translate("MainWindow", "About"))
-
-    def center_on_screen(self,MainWindow):
-        screen = QDesktopWidget().screenGeometry()
-        x = int((screen.width() - MainWindow.width()) / 2)
-        y = int((screen.height() - MainWindow.height()) / 2)
-        MainWindow.move(x, y)
-
 from ..resources import pic_rc

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui/ui/result_dialog.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/result_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -87,13 +87,3 @@ class Ui_Dialog(object):
         self.torque_button.setText(_translate("Dialog", "Torqe"))
         self.force_button.setText(_translate("Dialog", "Force"))
 from ..resources import pic_rc
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
