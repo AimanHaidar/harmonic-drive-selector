@@ -249,7 +249,7 @@ def torsional_angel(gear,load):
     
     return angle
 
-def output_bearing_dimensioning(preselection,F_tilting,operating_factor,static_factor,L_10_req):
+def output_bearing_dimensioning(preselection,F_tilting,operating_factor,static_factor,L_10_req,max_tilting_angle):
     '''
     this function determine the validity of output bearing based on the gear selected
 
@@ -328,9 +328,12 @@ def output_bearing_dimensioning(preselection,F_tilting,operating_factor,static_f
         # Calculating the static safety factor
         f_s = C_0 / P_0
 
-        
-
         if f_s < static_factor:
+            gear_index += 1
+            continue
+        
+        tilting_angle = M_av/output_bearing_data[gear_series].loc["Tilting moment stiffness K_B [Nm/arcmin]",gear_size]
+        if tilting_angle > max_tilting_angle:
             gear_index += 1
             continue
         
@@ -377,4 +380,4 @@ F_tilting = {
 # Calculate tilting moment for each cycle
 a = [Fr * (Lr + F_tilting['R']) + Fa * La for Fr, Fa, Lr, La in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'], F_tilting['Lr_cycle'], F_tilting['La_cycle'])]
 print(a)
-print(output_bearing_dimensioning(s2,F_tilting,1.2,1.5,L_req))
+print(output_bearing_dimensioning(s2,F_tilting,1.2,1.5,L_req,1))
