@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from gui.generated.bearing_factor_dialog import Ui_Dialog
+from gui.generated.bearing_factors_dialog import Ui_Dialog
 from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 
 class BearingFactorsDialog(QtWidgets.QDialog):
@@ -18,11 +18,11 @@ class BearingFactorsDialog(QtWidgets.QDialog):
         load_condition = self.ui.load_condition.currentText()
         print(load_condition)
         if load_condition == "No impact loads or vibrations":
-            self.ui.operating_factor_range.setText("operating factor: 1.0 - 1.2")
+            self.ui.operating_factor_range.setText("recommended operating factor: 1.0 - 1.2")
         elif load_condition == "Normal loads":
-            self.ui.operating_factor_range.setText("operating factor: 1.2 - 1.5")
+            self.ui.operating_factor_range.setText("recommended operating factor: 1.2 - 1.5")
         elif load_condition == "Impact loads or vibrations":
-            self.ui.operating_factor_range.setText("operating factor: 1.5 - 3.0")
+            self.ui.operating_factor_range.setText("recommended operating factor: 1.5 - 3.0")
 
         bearing_operating_condition = self.ui.operating_cond_bearing.currentText()
         print(bearing_operating_condition=="Normal operating conditions")
