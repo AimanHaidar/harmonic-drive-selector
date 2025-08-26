@@ -17,7 +17,7 @@ from gui.dialogs.result_dialog import ResultDialog
 from gui.dialogs.drive_application_dialog import DriveApplicationDialog
 from gui.dialogs.bearing_factors_dialog import BearingFactorsDialog
 
-from src.harmonic_dasigner import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning
+from src.harmonic_designer import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning
 from data.reducers_tables import reducers_df
 
 import sys

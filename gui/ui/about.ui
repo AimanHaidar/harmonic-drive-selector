@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>636</width>
+    <height>385</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>621</width>
-     <height>451</height>
+     <x>0</x>
+     <y>0</y>
+     <width>641</width>
+     <height>481</height>
     </rect>
    </property>
    <property name="html">
@@ -27,18 +27,18 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;About Harmonic Selector App:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;gt; It help engineers to select the write harmonic gear instead of repeat calculations many times&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;gt; I make some qeustion just for learning question for who don't know Harmonic drives&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;gt; It contain only two types of of Harmonic drive only CSG and SHG which they are the most used&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;gt;you need to have at torque data and crossponding angular speed for your application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;    &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot;&gt;    &lt;/span&gt;&lt;/p&gt;
+&lt;h1 align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:22pt; font-weight:600; color:#2c3e50;&quot;&gt;About Harmonic Selector App&lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; font-weight:600; color:#222222;&quot;&gt;    &lt;/span&gt;&lt;/h1&gt;
+&lt;p style=&quot; margin-top:6px; margin-bottom:6px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot;&gt;      The &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; font-weight:600; color:#1a73e8;&quot;&gt;Harmonic Selector App&lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot;&gt; helps engineers choose the right &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; font-weight:600; color:#1a73e8;&quot;&gt;Harmonic Drive®&lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot;&gt; for their application.        &lt;/span&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot; style=&quot; margin-top:6px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;  Supports the two most widely used series: &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;CSG&lt;/span&gt; and &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;SHG&lt;/span&gt;.        &lt;br /&gt;        &lt;span style=&quot; font-style:italic;&quot;&gt;(JSON file stream of data is not supported yet.)&lt;/span&gt;            &lt;/li&gt;
+&lt;li style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot; style=&quot; margin-top:4px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;   Input required: &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;torque data&lt;/span&gt; and &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;tilting force data&lt;/span&gt; with corresponding &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;angular speed&lt;/span&gt;.            &lt;/li&gt;
+&lt;li style=&quot; font-family:'Segoe UI','Ubuntu','Roboto','sans-serif'; font-size:13pt; color:#222222;&quot; style=&quot; margin-top:4px; margin-bottom:6px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;&quot;&gt;   Algorithms and reference data are based on official resources from &lt;span style=&quot; font-weight:600; color:#1a73e8;&quot;&gt;Harmonic Drive SE&lt;/span&gt;.            &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/pic.qrc"/>
+ </resources>
  <connections/>
 </ui>
