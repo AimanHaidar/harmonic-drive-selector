@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="pictures">
+    <file>pictures/information.png</file>
+    <file>pictures/force_diagram.png</file>
+    <file>pictures/forces.png</file>
+    <file>pictures/torque_digram.png</file>
     <file>pictures/CSG_photo.png</file>
     <file>pictures/SHG_photo.png</file>
   </qresource>
