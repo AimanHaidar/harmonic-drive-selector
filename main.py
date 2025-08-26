@@ -196,12 +196,19 @@ class HarmonicSelctorApp(QMainWindow):
                     'n_cycle': [self.tilting_force_data[0][4], self.tilting_force_data[1][4], self.tilting_force_data[2][4]],
                     't_p': self.tilting_force_data[3][2]
                 }
-                print(self.tilting_data)
+                
+                tilting_angle_dialog = InputLifetimeDialog()
+                tilting_angle_dialog.ui.label.setText("minimum tilting angle (arcmin):")
+                tilting_angle_dialog.exec_()
+
                 bearing_factors_dialog = BearingFactorsDialog()
                 state = bearing_factors_dialog.exec_()
                 if state == bearing_factors_dialog.Rejected:
                     return
-                self.selection3 = output_bearing_dimensioning(self.selection2,self.tilting_data,bearing_factors_dialog.operating_factor,bearing_factors_dialog.minimum_static_safety_factor,20000)
+                bearing_lifetime_dialog = InputLifetimeDialog()
+                bearing_lifetime_dialog.ui.label.setText("required life time of bearing:")
+                bearing_lifetime_dialog.exec_()
+                self.selection3 = output_bearing_dimensioning(self.selection2,self.tilting_data,bearing_factors_dialog.operating_factor,bearing_factors_dialog.minimum_static_safety_factor,bearing_lifetime_dialog.lifetime,tilting_angle_dialog.lifetime)
                 self.selection3 = torque_based_dimensioning(self.selection3.split("-")[0],
                     self.load_data,
                     self.lifetime,
