@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(640, 480)
+        Form.resize(636, 385)
         self.textBrowser = QtWidgets.QTextBrowser(Form)
-        self.textBrowser.setGeometry(QtCore.QRect(10, 10, 621, 451))
+        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 641, 481))
         self.textBrowser.setObjectName("textBrowser")
 
         self.retranslateUi(Form)
@@ -29,12 +29,11 @@ class Ui_Form(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu Sans\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">About Harmonic Selector App:</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">&gt; It help engineers to select the write harmonic gear instead of repeat calculations many times</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">&gt; I make some qeustion just for learning question for who don\'t know Harmonic drives</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">&gt; It contain only two types of of Harmonic drive only CSG and SHG which they are the most used</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:14pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">&gt;you need to have at torque data and crossponding angular speed for your application</span></p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\"><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\">    </span></p>\n"
+"<h1 align=\"center\" style=\" margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\"><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:22pt; font-weight:600; color:#2c3e50;\">About Harmonic Selector App</span><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; font-weight:600; color:#222222;\">    </span></h1>\n"
+"<p style=\" margin-top:6px; margin-bottom:6px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\"><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\">      The </span><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; font-weight:600; color:#1a73e8;\">Harmonic Selector App</span><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\"> helps engineers choose the right </span><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; font-weight:600; color:#1a73e8;\">Harmonic Drive®</span><span style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\"> for their application.        </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:6px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">  Supports the two most widely used series: <span style=\" font-weight:600; color:#1a73e8;\">CSG</span> and <span style=\" font-weight:600; color:#1a73e8;\">SHG</span>.        <br />        <span style=\" font-style:italic;\">(JSON file stream of data is not supported yet.)</span>            </li>\n"
+"<li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:4px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">   Input required: <span style=\" font-weight:600; color:#1a73e8;\">torque data</span> and <span style=\" font-weight:600; color:#1a73e8;\">tilting force data</span> with corresponding <span style=\" font-weight:600; color:#1a73e8;\">angular speed</span>.            </li>\n"
+"<li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:4px; margin-bottom:6px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">   Algorithms and reference data are based on official resources from <span style=\" font-weight:600; color:#1a73e8;\">Harmonic Drive SE</span>.            </li></ul></body></html>"))
+from ..resources import pic_rc

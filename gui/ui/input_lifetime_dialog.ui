@@ -49,7 +49,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>wanted Lifetime:</string>
+    <string>required Lifetime:</string>
    </property>
   </widget>
  </widget>
