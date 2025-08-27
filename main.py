@@ -149,6 +149,7 @@ class HarmonicSelctorApp(QMainWindow):
             )
         
         self.show_result(self.selection1)
+        self.step = 0
 
         if self.continue_dimensioning:
             #open the drive application dialog to get the type of application
@@ -174,7 +175,9 @@ class HarmonicSelctorApp(QMainWindow):
                 "Ratio":int(self.selection2.split("-")[2])
                 }
                 )
+            
             self.show_result(self.selection2,step=1)
+            self.step = 1
 
             if self.continue_dimensioning:
                 #TODO add bearing factors dialog here and edit the data dialog to input F_tilting
@@ -218,8 +221,9 @@ class HarmonicSelctorApp(QMainWindow):
                     "Ratio":int(self.selection3.split("-")[2])
                     }
                 )
-
+                
                 self.show_result(self.selection3,step=2)
+                self.step = 2
 
             
 
@@ -265,38 +269,79 @@ class HarmonicSelctorApp(QMainWindow):
         def show_force_data():
             result_dialog.fill_table(result_dialog.tilting_force_data_model,result_dialog.ui.dataTableView,self.tilting_force_data)
         
+        def show_result1():
+            drive_specs = reducers_df[(reducers_df["Series"] == self.selection1.split("-")[0]) & (reducers_df["Size"] == int(self.selection1.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection1.split("-")[2]))]
+            drive_specs = drive_specs.to_numpy().transpose()
+            result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
+            result_dialog.ui.selection.setText((self.selection1))
+
+        def show_result2():
+            drive_specs = reducers_df[(reducers_df["Series"] == self.selection2.split("-")[0]) & (reducers_df["Size"] == int(self.selection2.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection2.split("-")[2]))]
+            drive_specs = drive_specs.to_numpy().transpose()
+            result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
+            result_dialog.ui.selection.setText((self.selection2))
+            
+        def show_result3():
+            drive_specs = reducers_df[(reducers_df["Series"] == self.selection3.split("-")[0]) & (reducers_df["Size"] == int(self.selection3.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection3.split("-")[2]))]
+            drive_specs = drive_specs.to_numpy().transpose()
+            result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
+            result_dialog.ui.selection.setText((self.selection3))
+
+        result_dialog.ui.torque_button.clicked.connect(show_torque_data)
+        result_dialog.ui.force_button.clicked.connect(show_force_data)
+
+        result_dialog.ui.result_1.clicked.connect(show_result1)
+        result_dialog.ui.result_3.clicked.connect(show_result3)
+        result_dialog.ui.result_2.clicked.connect(show_result2)
         if step == 2:
             result_dialog.ui.force_button.show()
             result_dialog.ui.torque_button.show()
-            result_dialog.ui.torque_button.clicked.connect(show_torque_data)
-            result_dialog.ui.force_button.clicked.connect(show_force_data)
-            result_dialog.ui.label_3.hide()
-        elif step ==1:
+            result_dialog.ui.torque_button.setChecked(True)
+            show_torque_data()
+            result_dialog.ui.label_3.hide() # hide the continue statment
+
+            result_dialog.ui.result_1.show()
+            result_dialog.ui.result_2.show()
+            result_dialog.ui.result_3.show()
+            result_dialog.ui.result_3.setChecked(True)
+            show_result3()
+            
+        elif step == 1:
             result_dialog.ui.label_3.setText("Continue With Output Bearing Dimensioning?")
             result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
+            
+            result_dialog.ui.result_1.show()
+            result_dialog.ui.result_2.show()
+            result_dialog.ui.result_2.setChecked(True)
+            show_result2()
+
         else:
+            result_dialog.ui.result_1.show()
+            result_dialog.ui.result_1.setChecked(True)
+            show_result1()
             result_dialog.fill_table(result_dialog.torque_data_model,result_dialog.ui.dataTableView,self.torque_data)
 
-        result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
-        result_dialog.ui.selection.setText((selection))
+        
         if selection.split("-")[0] in ["HFUC","CSG"]:
             result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/CSG_photo.png"))
         else:
             result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/SHG_photo.png"))
         self.continue_dimensioning = (result_dialog.exec_() == result_dialog.Accepted)
 
-def show_exception_box(exc_type, exc_value, exc_traceback):
-    """Show only the exception message in a QMessageBox (no details)."""
-    QMessageBox.critical(None, "Error", str(exc_value))
-
-# Install handler
-sys.excepthook = show_exception_box
 
 def main():
     print("Hello from harmonic-drives-selector!")
     app = QApplication(sys.argv)
     apply_global_style(app)
     window = HarmonicSelctorApp()
+
+    def show_exception_box(exc_type, exc_value, exc_traceback):
+        """Show only the exception message in a QMessageBox (no details)."""
+        QMessageBox.information(None, "Unfortunatly", str(exc_value))
+        window.show_result(window.selection1,step=window.step)
+
+    # Install handler
+    sys.excepthook = show_exception_box
     window.show()
     sys.exit(app.exec_())
 

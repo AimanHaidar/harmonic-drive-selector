@@ -41,6 +41,9 @@ class ResultDialog(QtWidgets.QDialog):
 
         self.ui.force_button.hide()
         self.ui.torque_button.hide()
+        
+        self.ui.result_2.hide()
+        self.ui.result_3.hide()
 
 
     def fill_table(self, model, table, data):
