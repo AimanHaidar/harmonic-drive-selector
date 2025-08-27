@@ -149,7 +149,6 @@ class HarmonicSelctorApp(QMainWindow):
             )
         
         self.show_result(self.selection1)
-        self.step = 0
 
         if self.continue_dimensioning:
             #open the drive application dialog to get the type of application
@@ -175,9 +174,7 @@ class HarmonicSelctorApp(QMainWindow):
                 "Ratio":int(self.selection2.split("-")[2])
                 }
                 )
-            
             self.show_result(self.selection2,step=1)
-            self.step = 1
 
             if self.continue_dimensioning:
                 #TODO add bearing factors dialog here and edit the data dialog to input F_tilting
@@ -221,9 +218,8 @@ class HarmonicSelctorApp(QMainWindow):
                     "Ratio":int(self.selection3.split("-")[2])
                     }
                 )
-                
+
                 self.show_result(self.selection3,step=2)
-                self.step = 2
 
             
 
@@ -328,20 +324,18 @@ class HarmonicSelctorApp(QMainWindow):
             result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/SHG_photo.png"))
         self.continue_dimensioning = (result_dialog.exec_() == result_dialog.Accepted)
 
+def show_exception_box(exc_type, exc_value, exc_traceback):
+    """Show only the exception message in a QMessageBox (no details)."""
+    QMessageBox.information(None, "Unfortunatly", str(exc_value))
+
+# Install handler
+sys.excepthook = show_exception_box
 
 def main():
     print("Hello from harmonic-drives-selector!")
     app = QApplication(sys.argv)
     apply_global_style(app)
     window = HarmonicSelctorApp()
-
-    def show_exception_box(exc_type, exc_value, exc_traceback):
-        """Show only the exception message in a QMessageBox (no details)."""
-        QMessageBox.information(None, "Unfortunatly", str(exc_value))
-        window.show_result(window.selection1,step=window.step)
-
-    # Install handler
-    sys.excepthook = show_exception_box
     window.show()
     sys.exit(app.exec_())
 
