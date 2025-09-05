@@ -16,6 +16,7 @@ from gui.dialogs.non_numbers_dialog import NonNumbersDialog
 from gui.dialogs.result_dialog import ResultDialog
 from gui.dialogs.drive_application_dialog import DriveApplicationDialog
 from gui.dialogs.bearing_factors_dialog import BearingFactorsDialog
+from gui.dialogs.how_it_works_dialog import HowItWorksDialog
 
 from src.harmonic_designer import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning
 from data.reducers_tables import reducers_df
@@ -55,6 +56,7 @@ class HarmonicSelctorApp(QMainWindow):
         self.ui.about_pushButton.clicked.connect(self.show_about)
         self.ui.start_pushButton.clicked.connect(self.start_selection)
         self.ui.exit_pushButton.clicked.connect(self.close)
+        self.ui.how_pushButton.clicked.connect(self.how_dialog)
         
         #TODO: add style sheet to unifiy style for other platforms
 
@@ -255,7 +257,6 @@ class HarmonicSelctorApp(QMainWindow):
 
     def show_result(self,selection,step=0):
         
-        print(selection)
         drive_specs = reducers_df[(reducers_df["Series"] == selection.split("-")[0]) & (reducers_df["Size"] == int(selection.split("-")[1])) & (reducers_df["Ratio"] == int(selection.split("-")[2]))]
         drive_specs = drive_specs.to_numpy().transpose()
         result_dialog = ResultDialog()
@@ -323,6 +324,10 @@ class HarmonicSelctorApp(QMainWindow):
         else:
             result_dialog.ui.drive_photo.setPixmap(QtGui.QPixmap(":/pictures/pictures/SHG_photo.png"))
         self.continue_dimensioning = (result_dialog.exec_() == result_dialog.Accepted)
+
+    def how_dialog(self):
+        how_it_works_dialog = HowItWorksDialog()
+        how_it_works_dialog.exec_()
 
 def show_exception_box(exc_type, exc_value, exc_traceback):
     """Show only the exception message in a QMessageBox (no details)."""

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>791</width>
+    <height>643</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,9 +55,9 @@
    <widget class="QLabel" name="CSG_label">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>40</x>
       <y>90</y>
-      <width>301</width>
+      <width>351</width>
       <height>20</height>
      </rect>
     </property>
@@ -69,13 +69,16 @@
     <property name="text">
      <string>   Solid Shaft Reducer (CSG-2UH)</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="SHG_label">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>390</x>
       <y>90</y>
-      <width>301</width>
+      <width>361</width>
       <height>20</height>
      </rect>
     </property>
@@ -87,14 +90,17 @@
     <property name="text">
      <string>Hollow Shaft Reducer (SHG-2UH)</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="Title">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>40</y>
-      <width>601</width>
-      <height>21</height>
+      <x>0</x>
+      <y>30</y>
+      <width>791</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -109,6 +115,9 @@
     </property>
     <property name="scaledContents">
      <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="start_pushButton">
@@ -133,7 +142,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>490</y>
+      <y>540</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -151,7 +160,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>440</y>
+      <y>490</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -165,13 +174,31 @@
      <string>About</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="how_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>440</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>How It Works</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>791</width>
      <height>24</height>
     </rect>
    </property>
