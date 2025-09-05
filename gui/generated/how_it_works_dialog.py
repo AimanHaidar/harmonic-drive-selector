@@ -14,10 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(865, 578)
+        Dialog.resize(850, 584)
+        self.gridLayout = QtWidgets.QGridLayout(Dialog)
+        self.gridLayout.setObjectName("gridLayout")
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(-5, -9, 871, 591))
+        self.textBrowser.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.textBrowser.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.textBrowser.setObjectName("textBrowser")
+        self.gridLayout.addWidget(self.textBrowser, 0, 0, 1, 1)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -29,5 +33,20 @@ class Ui_Dialog(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu Sans\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/pictures/pictures/algorithm.png\" /></p></body></html>"))
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt; color:#e9238f;\">How It Works</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">This program contain a selection procedure provided by the manufacturer to help engineers select the best harmonic drive for there application. It support selection of the many sizes for two models SHG and CSG. I list here the main algorithm of dimensioning.</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> <span style=\" font-size:16pt; color:#e9238f;\">• Dimensioning diagram</span><span style=\" font-size:18pt;\"><br /></span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <span style=\" font-size:14pt;\">        In principle, both torque and stiffness requirements should be taken into account in the design. For example, in robotics applications, the required torques are more decisive for the gear size, the torsional stiffness necessary for the process is often decisive in machine tool constructions. In addition, both the service life and the static safety of the output bearing should be calculated  for the output bearings. We therefore recommend that the design is carried out according to the following diagram.    </span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <img src=\":/pictures/pictures/algorithm.png\" width=\"800\" /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#e9238f;\">• Selection of the output bearing</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> <span style=\" font-size:18pt; font-weight:600; color:#5e5c64;\">Selection</span>    <span style=\" font-size:18pt; font-weight:600; color:#3d3846;\">procedure</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt; color:#e9238f;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <img src=\":/pictures/pictures/torque_deminsioning.png\" width=\"800\" />    <span style=\" font-size:16pt; color:#e9238f;\">• Stiffness based dimensioning</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <span style=\" font-size:18pt; font-weight:600; color:#5e5c64;\">Selection</span>    <span style=\" font-size:18pt; font-weight:600; color:#3d3846;\">procedure</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <span style=\" font-size:14pt;\">        In addition to the &quot;torque based dimensioning&quot; selection procedure, we recommend performing a stiffness based dimensioning, which evaluates the ratio of the load moment of inertia to the stiffness of the gear and compares it to the application requirements.    </span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <img src=\":/pictures/pictures/stiffness_diagram.png\" width=\"800\" /></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <span style=\" font-size:14pt;\"> </span><span style=\" font-size:16pt; color:#e9238f;\">• Selection of the output bearing</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> <span style=\" font-size:18pt; font-weight:600; color:#5e5c64;\">Selection</span>    <span style=\" font-size:18pt; font-weight:600; color:#3d3846;\">procedure</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt; color:#e9238f;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    <img src=\":/pictures/pictures/bearing_diagram.png\" width=\"800\" /></p></body></html>"))
 from ..resources import pic_rc

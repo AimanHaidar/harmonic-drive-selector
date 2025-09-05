@@ -345,6 +345,7 @@ def output_bearing_dimensioning(preselection,F_tilting,operating_factor,static_f
         break
     return str(gear_series) + "-" + str(gear_size) + "-" + str(gear_ratio) + "-" + "2UH"
 
+'''
 load_data = {
     'dt': [0.3, 3, 0.4],
     'T_cycle': [400, 320, 200],
@@ -381,3 +382,4 @@ F_tilting = {
 a = [Fr * (Lr + F_tilting['R']) + Fa * La for Fr, Fa, Lr, La in zip(F_tilting['Fr_cycle'], F_tilting['Fa_cycle'], F_tilting['Lr_cycle'], F_tilting['La_cycle'])]
 print(a)
 print(output_bearing_dimensioning(s2,F_tilting,1.2,1.5,L_req,1))
+'''

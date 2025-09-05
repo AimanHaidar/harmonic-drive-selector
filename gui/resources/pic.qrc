@@ -9,5 +9,6 @@
     <file>pictures/stiffness_diagram.png</file>
     <file>pictures/algorithm.png</file>
     <file>pictures/bearing_diagram.png</file>
+    <file>pictures/torque_deminsioning.png</file>
   </qresource>
 </RCC>

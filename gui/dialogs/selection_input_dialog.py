@@ -27,7 +27,7 @@ class SelectionInputDialog(QtWidgets.QDialog):
 
     def check_input(self):
         input = self.ui.lineEdit.text()
-        print(input)
+        
         if bool(pattern.match(input)):
             first_selection = input.split("-")
             try:

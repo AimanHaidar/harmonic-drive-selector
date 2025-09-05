@@ -16,7 +16,6 @@ class BearingFactorsDialog(QtWidgets.QDialog):
 
     def appropriate_factors(self):
         load_condition = self.ui.load_condition.currentText()
-        print(load_condition)
         if load_condition == "No impact loads or vibrations":
             self.ui.operating_factor_range.setText("recommended operating factor: 1.0 - 1.2")
         elif load_condition == "Normal loads":
@@ -25,7 +24,6 @@ class BearingFactorsDialog(QtWidgets.QDialog):
             self.ui.operating_factor_range.setText("recommended operating factor: 1.5 - 3.0")
 
         bearing_operating_condition = self.ui.operating_cond_bearing.currentText()
-        print(bearing_operating_condition=="Normal operating conditions")
         if bearing_operating_condition == "Normal operating conditions":
             self.minimum_static_safety_factor = 1.5
         elif bearing_operating_condition == "In case vibrations or impacts":
