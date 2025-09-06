@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/about.ui'
+# Form implementation generated from reading ui file '/home/aymanhadair/AI/harmonic-drive-selector/gui/ui/about_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -11,21 +11,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(636, 385)
-        self.textBrowser = QtWidgets.QTextBrowser(Form)
-        self.textBrowser.setGeometry(QtCore.QRect(0, 0, 641, 481))
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(634, 385)
+        self.gridLayout = QtWidgets.QGridLayout(Dialog)
+        self.gridLayout.setObjectName("gridLayout")
+        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser.setObjectName("textBrowser")
+        self.gridLayout.addWidget(self.textBrowser, 0, 0, 1, 1)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu Sans\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
@@ -36,4 +38,3 @@ class Ui_Form(object):
 "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:6px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">  Supports the two most widely used series: <span style=\" font-weight:600; color:#1a73e8;\">CSG</span> and <span style=\" font-weight:600; color:#1a73e8;\">SHG</span>.        <br />        <span style=\" font-style:italic;\">(JSON file stream of data is not supported yet.)</span>            </li>\n"
 "<li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:4px; margin-bottom:4px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">   Input required: <span style=\" font-weight:600; color:#1a73e8;\">torque data</span> and <span style=\" font-weight:600; color:#1a73e8;\">tilting force data</span> with corresponding <span style=\" font-weight:600; color:#1a73e8;\">angular speed</span>.            </li>\n"
 "<li style=\" font-family:\'Segoe UI\',\'Ubuntu\',\'Roboto\',\'sans-serif\'; font-size:13pt; color:#222222;\" style=\" margin-top:4px; margin-bottom:6px; margin-left:18px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:140%;\">   Algorithms and reference data are based on official resources from <span style=\" font-weight:600; color:#1a73e8;\">Harmonic Drive SE</span>.            </li></ul></body></html>"))
-from ..resources import pic_rc

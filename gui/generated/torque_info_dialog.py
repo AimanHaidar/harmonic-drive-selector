@@ -18,7 +18,7 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(5, 8, 491, 251))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap(":/pictures/pictures/torque_digram.png"))
+        self.label.setPixmap(QtGui.QPixmap(":/pictures/pictures/torque_diagram.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
