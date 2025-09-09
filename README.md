@@ -1,72 +1,88 @@
 # Harmonic Drive Selector
-This is a Harmonic Drive app built with Qt5 that allows engineers to easily select the appropriate drive for their application by inputting torque and angular speed data for their load.
+
+This is a Harmonic Drive app built with Qt5 that allows engineers to easily select the appropriate drive for their application by inputting torque, angular speed, and tilting forces data for their load.
+
+---
 
 ## Screenshots
-#### Main Window:
 
-![Description of image](screenshots/main_window.png)
+**Main Window:**  
+![Main Window](screenshots/main_window.png)
 
-#### Results:
+**Results:**  
+![Results](screenshots/results.png)
 
-![Description of image](screenshots/results.png)
+---
 
 ## Installation
 
-1. **Clone the repository**  
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/AimanHaidair/harmonic-drive-selector.git
 cd harmonic-drive-selector
 ```
 
-2. **add the requirements of the  project**
-due to uv lock user to install pyqt5-qt5 with pyqt5 windows show issue when use uvlock.
+### 2. Install Requirements
 
-##### Linux and MacOS
+> **Note:**  
+> On Linux/MacOS, use `uv sync`.  
+> On Windows, use `pip install -r requirements-win.txt`.  
+> (Windows users: PyQt5-Qt5 may have issues with uv lock.)
+
+#### Linux/MacOS
+
 ```bash
 uv sync
 ```
 
-##### Windows
+#### Windows
+
 ```cmd
-# source your enviroment first if you want
-pip install -r requirements-win-txt
+pip install -r requirements-win.txt
 ```
 
-3. **now you have two options to run:**
-    - **option 1:** using directly the main.py
-      
-    ##### Linux and MacOs
+---
+
+## Usage
+
+### Option 1: Run Directly
+
+#### Linux/MacOS
+
+```bash
+uv run main.py
+```
+
+#### Windows
+
+```cmd
+python -m main
+```
+
+### Option 2: Build Executable with PyInstaller
+
+1. Install PyInstaller in your environment:
+
     ```bash
-    uv run main.py
-    ```
-    
-    ##### Windows
-    ```cmd
-    python -m main
+    uv add pyinstaller
     ```
 
-    - **option 2:** building the project and get one exeutable file using pyinstaller
+2. Build the executable:
 
-        1. install pyinstall in your venv
+    **Linux:**
+    ```bash
+    .venv/bin/python -m PyInstaller --onefile main.py
+    ```
 
-        ```bash
-            uv add pyinstall
-        ```
-        2. run this command
+    **Windows:**
+    ```powershell
+    python -m PyInstaller --onefile --windowed main.py
+    ```
 
-            ##### Linux:
-            ```bash
-            .venv/bin/python -m PyInstaller --onefile main.py
-            ```
+The executable will be in the `dist` folder.
 
-            ##### Windows:
-            ```powershell
-            # in the enviroment you installed the requirements
-            python -m PyInstaller --onefile --windowed main.py
-            ```
-
-        this will create dist folder contain the executable
+---
 
 
 
