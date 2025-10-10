@@ -162,6 +162,11 @@ def torque_based_dimensioning(type,load_data,L_10_req,first_selection = {'Series
 
     return str(reducers_df.loc[gear_index,"Series"])+"-"+str(reducers_df.loc[gear_index,'Size'])+"-"+str(reducers_df.loc[gear_index,'Ratio'])+"-"+"2UH"
 
+def calculate_resonance_frequency(gear_series,gear_size,gear_ratio, J):
+    ratio = lambda x: 30 if x <= 30 else (50 if x <= 50 else 80)
+    K_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K1_i" + str(ratio(gear_ratio)) + " [x10^4 Nm/rad]"].values[0] * 1e4 #Nm/rad
+    f_n = (1 / (2 * pi)) * ((K_1 / J) ** 0.5) # working resonance frequency in Hz
+    return f_n
 
 def stiffness_based_dimensioning(preselection,application,J):
     '''
@@ -198,10 +203,8 @@ def stiffness_based_dimensioning(preselection,application,J):
         # Getting the required resonance frequency from the table based on the application
         f_res = resonance_frequency[application]
         # selecting the right column based on the gear ratio
-        ratio = lambda x: 30 if x <= 30 else (50 if x <= 50 else 80)
-        K_1 = torsional_data[gear_series].loc[torsional_data[gear_series]["Size"] == gear_size, "K1_i" + str(ratio(gear_ratio)) + " [x10^4 Nm/rad]"].values[0] * 1e4 #Nm/rad
-        f_n = (1 / (2 * pi)) * ((K_1 / J) ** 0.5) # working resonance frequency in Hz
-        # Checking the permissible resonance frequency fn ≥ fres
+        f_n = calculate_resonance_frequency(gear_series, gear_size, gear_ratio, J)
+        # Checking that resonance frequency is above minimum fn ≥ fres
         if f_n < f_res:
             gear_index += 1
             continue

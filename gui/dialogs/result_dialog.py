@@ -9,13 +9,13 @@ class ResultDialog(QtWidgets.QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
         QTimer.singleShot(0, self.center_on_screen)
-        # Create a model with 3 rows, 2 columns
+        # Create a model
         columns = [
             "Series", "Size", "Ratio", "Limit for repeated peak torque [Nm]",
             "Limit for average torque [Nm]", "Rated torque at rated speed 2000 rpm [Nm]",
             "Limit for momentary peak torque [Nm]", "Max. input speed [rpm]",
             "Limit for average input speed [rpm]", "Moment of inertia [x10^-4]",
-            "Weight (standard version,light version) [kg]",
+            "Weight (standard version,light version) [kg]","Resonance frequency [Hz]",
         ]
         self.torque_data_model = QStandardItemModel(5, 3)
         self.tilting_force_data_model = QStandardItemModel(4, 6)

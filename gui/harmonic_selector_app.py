@@ -18,8 +18,9 @@ from gui.dialogs.drive_application_dialog import DriveApplicationDialog
 from gui.dialogs.bearing_factors_dialog import BearingFactorsDialog
 from gui.dialogs.how_it_works_dialog import HowItWorksDialog
 
-from src.harmonic_designer import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning
+from src.harmonic_designer import torque_based_dimensioning,stiffness_based_dimensioning,output_bearing_dimensioning,calculate_resonance_frequency
 from data.reducers_tables import reducers_df
+import numpy as np
 
 import sys
 from pathlib import Path
@@ -176,6 +177,7 @@ class HarmonicSelctorApp(QMainWindow):
                 "Ratio":int(self.selection2.split("-")[2])
                 }
                 )
+            self.f_n = calculate_resonance_frequency(self.selection2.split("-")[0],int(self.selection2.split("-")[1]),int(self.selection2.split("-")[2]),load_moment_of_inertia)
             self.show_result(self.selection2,step=1)
 
             if self.continue_dimensioning:
@@ -220,7 +222,7 @@ class HarmonicSelctorApp(QMainWindow):
                     "Ratio":int(self.selection3.split("-")[2])
                     }
                 )
-
+                self.f_n = calculate_resonance_frequency(self.selection3.split("-")[0],int(self.selection3.split("-")[1]),int(self.selection3.split("-")[2]),load_moment_of_inertia)
                 self.show_result(self.selection3,step=2)
 
     def show_about(self):
@@ -262,18 +264,21 @@ class HarmonicSelctorApp(QMainWindow):
         def show_result1():
             drive_specs = reducers_df[(reducers_df["Series"] == self.selection1.split("-")[0]) & (reducers_df["Size"] == int(self.selection1.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection1.split("-")[2]))]
             drive_specs = drive_specs.to_numpy().transpose()
+            drive_specs = np.vstack((drive_specs,[0.0]))
             result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
             result_dialog.ui.selection.setText((self.selection1))
 
         def show_result2():
             drive_specs = reducers_df[(reducers_df["Series"] == self.selection2.split("-")[0]) & (reducers_df["Size"] == int(self.selection2.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection2.split("-")[2]))]
             drive_specs = drive_specs.to_numpy().transpose()
+            drive_specs = np.vstack((drive_specs,[self.f_n]))
             result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
             result_dialog.ui.selection.setText((self.selection2))
             
         def show_result3():
             drive_specs = reducers_df[(reducers_df["Series"] == self.selection3.split("-")[0]) & (reducers_df["Size"] == int(self.selection3.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection3.split("-")[2]))]
             drive_specs = drive_specs.to_numpy().transpose()
+            drive_specs = np.vstack((drive_specs,[self.f_n]))
             result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
             result_dialog.ui.selection.setText((self.selection3))
 
