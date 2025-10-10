@@ -264,7 +264,7 @@ class HarmonicSelctorApp(QMainWindow):
         def show_result1():
             drive_specs = reducers_df[(reducers_df["Series"] == self.selection1.split("-")[0]) & (reducers_df["Size"] == int(self.selection1.split("-")[1])) & (reducers_df["Ratio"] == int(self.selection1.split("-")[2]))]
             drive_specs = drive_specs.to_numpy().transpose()
-            drive_specs = np.vstack((drive_specs,[0.0]))
+            drive_specs = np.vstack((drive_specs,["not calculated"]))
             result_dialog.fill_table(result_dialog.specs_model,result_dialog.ui.driveTableView,drive_specs)
             result_dialog.ui.selection.setText((self.selection1))
 
