@@ -2,6 +2,8 @@
 
 This is a Harmonic Drive app built with Qt5 that allows engineers to easily select the appropriate drive for their application by inputting torque, angular speed, and tilting forces data for their load.
 
+> **Note:** This program is fully based on the instructions from the *[Harmonic Drive Gears](https://harmonicdrive.de/en/home)*.
+
 ---
 
 ## Screenshots
